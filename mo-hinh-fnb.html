@@ -1,515 +1,1073 @@
 <!DOCTYPE html>
-<html lang="vi" class="scroll-smooth">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tư vấn Giải pháp KiotViet cho Ngành F&B</title>
-    <meta name="description" content="Bộ phân tích chi tiết và giải pháp phần cứng cho từng mô hình ngành F&B sử dụng KiotViet.">
-    
-    <!-- Tailwind CSS -->
+    <title>Giải Pháp KiotViet FNB - Tài Liệu Chuyên Sâu</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts: Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
-        body { 
-            font-family: 'Inter', sans-serif;
-            background-color: #f8fafc;
-        }
+        body { font-family: 'Roboto', sans-serif; background-color: #f3f4f6; }
+        .kv-blue { color: #005ba0; }
+        .bg-kv-blue { background-color: #005ba0; }
         
-        .kv-blue-text { color: #007bff; }
-        .kv-blue-bg { background-color: #007bff; }
-        .kv-blue-border { border-color: #007bff; }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
 
-        .content-section {
-            padding-top: 5rem;
-            margin-top: -5rem;
-        }
-        .sidebar-nav a.active {
-            color: #007bff;
+        .nav-item.active {
+            background-color: #e0f2fe;
+            color: #005ba0;
+            border-right: 4px solid #005ba0;
             font-weight: 600;
-            background-color: #e7f1ff;
-            border-left-color: #007bff;
         }
         
-        /* Custom Table Styles */
-        .custom-table { @apply min-w-full divide-y divide-slate-200; }
-        .custom-table thead { @apply bg-slate-50; }
-        .custom-table th { @apply px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider; }
-        .custom-table tbody { @apply bg-white divide-y divide-slate-200; }
-        .custom-table td { @apply px-6 py-4 whitespace-normal text-sm text-slate-600; }
-        .custom-table code { @apply bg-slate-100 text-slate-800 px-2 py-1 rounded; }
+        .content-section { display: none; animation: fadeIn 0.3s ease-in-out; }
+        .content-section.active { display: block; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-        /* Hide Scrollbar for tab container */
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .roi-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+        }
+        .roi-header {
+            background: linear-gradient(135deg, #005ba0 0%, #0077d4 100%);
+            color: white;
+        }
+        
+        .section-header {
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            color: #374151;
+            font-weight: 700;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            margin-top: 2.5rem;
+        }
+        .section-header i { margin-right: 0.75rem; color: #005ba0; }
+
+        .hero-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 0.75rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        /* Text block styles */
+        .text-content p { margin-bottom: 1rem; line-height: 1.6; color: #4b5563; }
+        .text-content ul { list-style-type: disc; margin-left: 1.5rem; margin-bottom: 1rem; color: #4b5563; }
+        .text-content li { margin-bottom: 0.5rem; }
+        .text-content strong { color: #1f2937; font-weight: 600; }
     </style>
 </head>
-<body class="bg-slate-50">
+<body class="flex h-screen overflow-hidden">
 
-    <!-- Header -->
-    <header id="top" class="bg-white border-b border-slate-200">
-        <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <a href="#top" class="flex items-center">
-                    <img src="https://www.kiotviet.vn/wp-content/uploads/2023/08/logo-kiotviet.svg" alt="KiotViet Logo" class="h-8">
-                </a>
-                <span class="font-semibold text-slate-700 hidden sm:block">Tư vấn Giải pháp F&B</span>
-            </div>
+    <!-- SIDEBAR NAVIGATION -->
+    <aside class="w-64 bg-white shadow-xl flex-shrink-0 flex flex-col z-20 h-full hidden md:flex">
+        <div class="p-6 border-b flex items-center justify-center">
+            <div class="text-2xl font-bold kv-blue"><i class="fa-solid fa-cube mr-2"></i>KiotViet FNB</div>
         </div>
-    </header>
+        <nav class="flex-1 overflow-y-auto py-4">
+            <ul class="space-y-1">
+                <li>
+                    <button onclick="showSection('overview')" class="nav-item active w-full text-left px-6 py-3 hover:bg-gray-50 transition flex items-center">
+                        <i class="fa-solid fa-compass w-6"></i> Tổng Quan Giải Pháp
+                    </button>
+                </li>
+                <div class="px-6 py-2 text-xs font-bold text-gray-400 uppercase tracking-wider mt-4">Nhóm Phục Vụ Nhanh</div>
+                <li>
+                    <button onclick="showSection('topic1')" class="nav-item w-full text-left px-6 py-3 hover:bg-gray-50 transition flex items-center">
+                        <i class="fa-solid fa-utensils w-6"></i> 1. Quán Ăn Bình Dân
+                    </button>
+                </li>
+                <li>
+                    <button onclick="showSection('topic2')" class="nav-item w-full text-left px-6 py-3 hover:bg-gray-50 transition flex items-center">
+                        <i class="fa-solid fa-mug-hot w-6"></i> 2. Cafe & Trà Sữa
+                    </button>
+                </li>
+                
+                <div class="px-6 py-2 text-xs font-bold text-gray-400 uppercase tracking-wider mt-4">Nhóm Giải Trí</div>
+                <li>
+                    <button onclick="showSection('topic3')" class="nav-item w-full text-left px-6 py-3 hover:bg-gray-50 transition flex items-center">
+                        <i class="fa-solid fa-bowling-ball w-6"></i> 3. Billiards (Bida)
+                    </button>
+                </li>
+                <li>
+                    <button onclick="showSection('topic4')" class="nav-item w-full text-left px-6 py-3 hover:bg-gray-50 transition flex items-center">
+                        <i class="fa-solid fa-microphone-lines w-6"></i> 4. Karaoke
+                    </button>
+                </li>
 
-    <main>
-        <!-- Hero Section -->
-        <section class="text-center py-16 md:py-24 bg-gradient-to-br from-white to-blue-50">
-            <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
-                    Tư vấn Giải pháp KiotViet cho F&B
-                </h1>
-                <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">
-                    Bộ phân tích chi tiết, đề xuất giải pháp phần cứng & quy trình vận hành cho từng mô hình kinh doanh.
+                <div class="px-6 py-2 text-xs font-bold text-gray-400 uppercase tracking-wider mt-4">Nhóm Nhà Hàng</div>
+                <li>
+                    <button onclick="showSection('topic5')" class="nav-item w-full text-left px-6 py-3 hover:bg-gray-50 transition flex items-center">
+                        <i class="fa-solid fa-fire w-6"></i> 5. Lẩu & Nướng
+                    </button>
+                </li>
+                <li>
+                    <button onclick="showSection('topic6')" class="nav-item w-full text-left px-6 py-3 hover:bg-gray-50 transition flex items-center">
+                        <i class="fa-solid fa-infinity w-6"></i> 6. Nhà Hàng Buffet
+                    </button>
+                </li>
+                <li>
+                    <button onclick="showSection('topic7')" class="nav-item w-full text-left px-6 py-3 hover:bg-gray-50 transition flex items-center">
+                        <i class="fa-solid fa-wine-glass w-6"></i> 7. Fine Dining
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- MOBILE HEADER -->
+    <div class="md:hidden fixed top-0 left-0 w-full bg-white shadow-md z-30 flex items-center justify-between p-4">
+        <div class="text-xl font-bold kv-blue">KiotViet FNB</div>
+        <button onclick="toggleMobileMenu()" class="text-gray-600 focus:outline-none">
+            <i class="fa-solid fa-bars text-2xl"></i>
+        </button>
+    </div>
+    
+    <!-- MOBILE MENU OVERLAY -->
+    <div id="mobile-menu" class="fixed inset-0 bg-gray-800 bg-opacity-75 z-40 hidden" onclick="toggleMobileMenu()">
+        <div class="bg-white w-64 h-full shadow-xl overflow-y-auto" onclick="event.stopPropagation()">
+             <div class="p-4 border-b font-bold text-lg">Menu</div>
+             <ul class="space-y-1 py-2" id="mobile-nav-list"></ul>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 overflow-y-auto p-4 md:p-8 mt-14 md:mt-0" id="main-container">
+        
+        <!-- SECTION 0: OVERVIEW -->
+        <div id="overview" class="content-section active max-w-5xl mx-auto">
+            <div class="bg-white rounded-xl shadow-sm p-8 mb-6 border-l-4 border-blue-600">
+                <h1 class="text-3xl font-bold text-gray-800 mb-4">Tổng Quan: Bộ Giải Pháp Chuyên Biệt</h1>
+                <p class="text-gray-600 text-lg">
+                    Ngành F&B là một bức tranh đa sắc. KiotViet mang đến một <strong>Bộ giải pháp được "may đo"</strong> cho 7 mô hình kinh doanh phổ biến nhất, giúp bạn vận hành trơn tru và tối ưu chi phí.
                 </p>
             </div>
-        </section>
+            
+            <img src="https://cdn-kvweb.kiotviet.vn/kiotviet-website/wp-content/uploads/2021/05/09100559/phan-mem-nha-hang.png" alt="KiotViet FNB Overview" class="hero-image">
 
-        <!-- Main Horizontal Tab Navigation -->
-        <div class="sticky top-0 z-30 bg-white shadow-sm border-b border-slate-200">
-             <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex items-center space-x-2">
-                    <button id="scroll-tabs-left" class="p-2 rounded-full hover:bg-slate-100 text-slate-500 transition-opacity opacity-0 disabled:opacity-0">
-                        <i class="fa-solid fa-chevron-left fa-sm"></i>
-                    </button>
-                    <div id="tabs-scroll-wrapper" class="flex-grow overflow-x-hidden no-scrollbar">
-                        <nav id="main-tabs" class="flex items-center space-x-2 py-3 transition-transform duration-300 ease-in-out">
-                            <!-- Tab buttons will be generated by JS -->
-                        </nav>
-                    </div>
-                     <button id="scroll-tabs-right" class="p-2 rounded-full hover:bg-slate-100 text-slate-500 transition-opacity">
-                        <i class="fa-solid fa-chevron-right fa-sm"></i>
-                    </button>
+            <!-- Groups -->
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white p-6 rounded-lg shadow-sm border hover:shadow-md transition">
+                    <h3 class="font-bold text-xl mb-2 text-green-600"><i class="fa-solid fa-bolt mr-2"></i>Tốc Độ & Tiện Lợi</h3>
+                    <p class="text-sm text-gray-500 mb-4">Mô hình phục vụ nhanh, khách đông, đơn nhỏ.</p>
+                    <ul class="text-sm space-y-2 text-gray-700">
+                        <li><i class="fa-solid fa-check text-green-500 mr-2"></i>Quán Ăn Bình Dân</li>
+                        <li><i class="fa-solid fa-check text-green-500 mr-2"></i>Cafe & Trà Sữa</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-sm border hover:shadow-md transition">
+                    <h3 class="font-bold text-xl mb-2 text-purple-600"><i class="fa-solid fa-clock mr-2"></i>Dịch Vụ Giải Trí</h3>
+                    <p class="text-sm text-gray-500 mb-4">Kinh doanh thời gian là cốt lõi + F&B.</p>
+                    <ul class="text-sm space-y-2 text-gray-700">
+                        <li><i class="fa-solid fa-check text-purple-500 mr-2"></i>Billiards (Bida)</li>
+                        <li><i class="fa-solid fa-check text-purple-500 mr-2"></i>Karaoke</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm border hover:shadow-md transition">
+                    <h3 class="font-bold text-xl mb-2 text-orange-600"><i class="fa-solid fa-star mr-2"></i>Ẩm Thực Chuyên Nghiệp</h3>
+                    <p class="text-sm text-gray-500 mb-4">Quy trình bếp phức tạp, trải nghiệm cao.</p>
+                    <ul class="text-sm space-y-2 text-gray-700">
+                        <li><i class="fa-solid fa-check text-orange-500 mr-2"></i>Lẩu & Nướng</li>
+                        <li><i class="fa-solid fa-check text-orange-500 mr-2"></i>Buffet</li>
+                        <li><i class="fa-solid fa-check text-orange-500 mr-2"></i>Fine Dining</li>
+                    </ul>
                 </div>
             </div>
         </div>
 
-        <!-- Tab Content Panels -->
-        <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
-            
-            <!-- =================================================================== -->
-            <!-- TAB CONTENT 1: CÀ PHÊ & TRÀ SỮA -->
-            <!-- =================================================================== -->
-            <div id="content-cafe" class="tab-content-panel">
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                    <!-- Sticky Sidebar -->
-                    <aside class="lg:col-span-3">
-                        <nav id="sidebar-nav-cafe" class="sidebar-nav sticky top-24">
-                             <div class="flex flex-col bg-white/60 backdrop-blur-lg rounded-xl p-4 border border-slate-200 space-y-1">
-                                <a href="#cafe-1" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">1. Giới thiệu chung</a>
-                                <a href="#cafe-2" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">2. Menu Giả định</a>
-                                <a href="#cafe-3" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">3. Chân dung & Nỗi đau</a>
-                                <a href="#cafe-4" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">4. Lựa chọn: Trạm Thu ngân</a>
-                                <a href="#cafe-5" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">5. Lựa chọn: Thiết bị Order</a>
-                                <a href="#cafe-6" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">6. Gói Phần cứng</a>
-                                <a href="#cafe-7" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">7. Setup Thiết bị Mạng</a>
-                                <a href="#cafe-8" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">8. Quy trình Thiết lập</a>
-                                <a href="#cafe-9" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">9. Tính toán ROI</a>
-                                <a href="#cafe-10" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">10. Tư vấn Nâng cao</a>
+        <!-- TOPIC 1: QUAN AN BINH DAN -->
+        <div id="topic1" class="content-section max-w-5xl mx-auto">
+            <div class="bg-white rounded-xl shadow-sm p-6 mb-6 border-t-4 border-green-500">
+                <div class="flex items-center justify-between mb-4">
+                    <h1 class="text-2xl md:text-3xl font-bold text-gray-800"><i class="fa-solid fa-utensils mr-3 text-green-600"></i>Mô Hình Quán Ăn Bình Dân</h1>
+                    <span class="bg-green-100 text-green-800 text-xs font-bold px-3 py-1 rounded-full uppercase">Tiệm Phở Gia Truyền</span>
+                </div>
+            </div>
+            <img src="https://owa.bestprice.vn/images/articles/uploads/an-sach-15-quan-pho-ngon-re-o-ha-noi-5f6c02a1e0b66.jpg" alt="Quan An Binh Dan" class="hero-image">
+
+            <h2 class="section-header"><i class="fa-solid fa-layer-group"></i>I. Tổng Quan & Phân Tích</h2>
+            <div class="bg-white rounded-lg shadow-sm p-6 mb-6 text-content">
+                <h3 class="font-bold text-lg mb-3">1. Phân tích Tổng quan Ngành</h3>
+                <p>Kinh doanh quán ăn bình dân (Cơm, Phở, Bún, Miến...) có đặc thù là <strong>"Giờ cao điểm cực ngắn nhưng lượng khách cực đông"</strong>. Khách hàng thường chỉ có 30-45 phút để ăn trưa hoặc ăn sáng vội vàng, nên họ không có nhiều kiên nhẫn để chờ đợi.</p>
+                <p>Bên cạnh đó, khẩu vị người Việt rất đa dạng, dẫn đến việc một món ăn có hàng tá biến thể (không hành, nhiều nước béo, ít bánh, thêm quẩy...). Nếu quy trình order không được chuẩn hóa, quán rất dễ rơi vào cảnh "bếp làm một đằng, khách gọi một nẻo", gây lãng phí và mất khách.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <div class="bg-white rounded-lg shadow-sm p-6">
+                    <h3 class="font-bold text-lg mb-4 border-b pb-2">Chân dung mô hình mẫu</h3>
+                    <div class="grid grid-cols-2 gap-4 text-sm">
+                        <div><span class="text-gray-500">Quy mô:</span> <span class="font-medium">60m2, 15 bàn</span></div>
+                        <div><span class="text-gray-500">Menu:</span> <span class="font-medium">Phở Bò, Cơm Rang, Quẩy</span></div>
+                        <div class="col-span-2"><span class="text-gray-500">Vấn đề chính:</span> <span class="font-medium">Sai yêu cầu (hành/mỡ), tắc nghẽn thanh toán.</span></div>
+                    </div>
+                </div>
+                <!-- Detailed ROI -->
+                <div class="roi-card rounded-lg shadow-sm overflow-hidden flex flex-col">
+                    <div class="roi-header p-4">
+                        <h3 class="font-bold text-lg"><i class="fa-solid fa-calculator mr-2"></i>Bài Toán Đầu Tư</h3>
+                        <p class="text-xs opacity-90">Gói Chuyên Nghiệp (2 Năm)</p>
+                    </div>
+                    <div class="p-4 text-sm flex-1 flex flex-col justify-between">
+                        <div class="mb-4">
+                            <div class="flex justify-between mb-1 border-b border-gray-100 pb-1">
+                                <span class="text-gray-600">Phần mềm (2 năm):</span>
+                                <span class="font-medium">~7.440.000đ</span>
                             </div>
-                        </nav>
-                    </aside>
-                    <!-- Main Content -->
-                    <div class="lg:col-span-9">
-                        <div class="bg-white/60 backdrop-blur-lg rounded-2xl p-6 md:p-8 border border-slate-200 shadow-sm space-y-12">
-                            <section id="cafe-1" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-info-circle mr-3 kv-blue-text"></i>1. Giới thiệu chung về Ngành Cà phê & Trà sữa</h2><p class="mt-4">Ngành hàng Cà phê & Trà sữa là một trong những ngành cạnh tranh khốc liệt nhất trong lĩnh vực F&B.</p><h3 class="text-lg font-semibold text-slate-700 mt-6 mb-3">Đặc điểm chính:</h3><ul class="space-y-3"><li class="flex items-start"><i class="fa-solid fa-blender w-5 mt-1 mr-3 text-slate-400"></i><span><strong>Sản phẩm phức tạp:</strong> Menu đa dạng, có nhiều tùy chọn (topping, mức đường, mức đá) đòi hỏi độ chính xác cao khi order.</span></li><li class="flex items-start"><i class="fa-solid fa-couch w-5 mt-1 mr-3 text-slate-400"></i><span><strong>Cạnh tranh bằng trải nghiệm:</strong> Khách hàng không chỉ mua đồ uống mà còn mua "không gian".</span></li><li class="flex items-start"><i class="fa-solid fa-clock w-5 mt-1 mr-3 text-slate-400"></i><span><strong>Giờ cao điểm:</strong> Vận hành cực kỳ áp lực vào giờ trưa và tối. Tốc độ là yếu tố sống còn.</span></li><li class="flex items-start"><i class="fa-solid fa-user-clock w-5 mt-1 mr-3 text-slate-400"></i><span><strong>Tỷ lệ nhân viên nghỉ việc:</strong> Cao. Cần một hệ thống dễ sử dụng để đào tạo nhanh.</span></li><li class="flex items-start"><i class="fa-solid fa-store-alt w-5 mt-1 mr-3 text-slate-400"></i><span><strong>Kênh bán đa dạng:</strong> Dine-in, Take-away, và bắt buộc phải có App Giao hàng.</span></li></ul></section>
-                            <section id="cafe-2" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-book-open mr-3 kv-blue-text"></i>2. Menu Giả định ("The Local Brew")</h2><div class="mt-4 overflow-x-auto"><table class="custom-table"><thead><tr><th>Nhóm hàng</th><th>Tên hàng hóa</th><th>Tùy chọn</th></tr></thead><tbody><tr><td><strong>Cà phê</strong></td><td>Cà phê Đen/Nâu/Bạc Xỉu</td><td>- Mức đường (Mặc định, 50%, 70%) <br> - Mức đá (Mặc định, Ít đá)</td></tr><tr><td><strong>Trà Trái Cây</strong></td><td>Trà Đào Cam Sả</td><td>- Mức đường, Mức đá <br> - Thêm Topping (Trân châu, Thạch đào)</td></tr><tr><td><strong>Đá Xay</strong></td><td>Cookies & Cream</td><td>- Thêm Topping (Trân châu trắng)</td></tr><tr><td><strong>Topping</strong></td><td>Trân châu trắng, Thạch đào</td><td>(Có thể bán riêng)</td></tr></tbody></table></div></section>
-                            <section id="cafe-3" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-user-tie mr-3 kv-blue-text"></i>3. Chân dung & Nỗi đau</h2><div class="mt-4 bg-slate-50 rounded-lg p-4 border"><p><strong>Khách hàng:</strong> Chị Lan, chủ quán "The Local Brew".</p><p><strong>Mô hình:</strong> Quán cà phê độc lập, 3 tầng (35 bàn).</p></div><div class="mt-6 bg-red-50 border-l-4 border-red-500 text-red-800 p-4 rounded-r-lg" role="alert"><h4 class="font-bold flex items-center"><i class="fa-solid fa-heart-crack mr-2"></i>Nỗi đau cốt lõi</h4><ol class="list-decimal list-inside mt-2 space-y-1"><li><strong>Sai sót Order:</strong> Nhân viên ghi tay, Barista đọc nhầm/thiếu topping.</li><li><strong>Lãng phí nhân sự:</strong> Tốn thời gian chạy đi chạy lại giữa 3 tầng.</li><li><strong>Hỗn loạn Quầy Bar:</strong> Bill giấy ướt, mất, không biết làm món nào trước.</li><li><strong>Chậm trễ Thanh toán:</strong> Check app ngân hàng thủ công để xác nhận QR.</li><li><strong>Không quản lý được:</strong> Lo lắng gian lận, không biết doanh thu, tồn kho từ xa.</li></ol></div></section>
-                            <section id="cafe-4" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-cash-register mr-3 kv-blue-text"></i>4. Lựa chọn (1): Trạm Thu ngân chính</h2><div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6"><div class="border rounded-lg p-4 bg-white"><h4 class="font-bold flex items-center"><i class="fa-solid fa-desktop mr-2 text-slate-500"></i>A: Dùng Bộ PC</h4><p class="text-sm text-slate-500 mt-2"><strong>Ưu điểm:</strong> <span class="text-green-600">Tiết kiệm chi phí</span>.</p><p class="text-sm text-slate-500"><strong>Nhược điểm:</strong> <span class="text-red-600">Thao tác chậm hơn</span>.</p></div><div class="border-2 kv-blue-border rounded-lg p-4 bg-blue-50 relative"><span class="absolute top-0 right-0 -mt-3 -mr-3 kv-blue-bg text-white text-xs font-bold px-3 py-1 rounded-full">Khuyến nghị</span><h4 class="font-bold flex items-center"><i class="fa-solid fa-tablet-screen-button mr-2 kv-blue-text"></i>B: Máy POS Chuyên dụng</h4><p class="text-sm text-slate-600 mt-2"><strong>Ưu điểm:</strong> <span class="text-green-600">Gọn gàng, thao tác rất nhanh,</span> dễ đào tạo.</p><p class="text-sm text-slate-600"><strong>Nhược điểm:</strong> <span class="text-red-600">Chi phí đầu tư ban đầu.</span></p></div></div></section>
-                            <section id="cafe-5" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-mobile-alt mr-3 kv-blue-text"></i>5. Lựa chọn (2): Thiết bị Order Phụ trợ</h2><div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6"><div class="border-2 kv-blue-border rounded-lg p-4 bg-blue-50 relative"><span class="absolute top-0 right-0 -mt-3 -mr-3 kv-blue-bg text-white text-xs font-bold px-3 py-1 rounded-full">Khuyến nghị</span><h4 class="font-bold flex items-center"><i class="fa-solid fa-tablet-alt mr-2 kv-blue-text"></i>A: Đầu tư Tablet chuyên dụng</h4><p class="text-sm text-slate-600 mt-2"><strong>Ưu điểm:</strong> <span class="text-green-600">Chuyên nghiệp,</span> màn hình to, chọn topping nhanh.</p><p class="text-sm text-slate-600"><strong>Nhược điểm:</strong> <span class="text-red-600">Chi phí đầu tư.</span></p></div><div class="border rounded-lg p-4 bg-white"><h4 class="font-bold flex items-center"><i class="fa-solid fa-mobile-screen mr-2 text-slate-500"></i>B: Dùng Điện thoại nhân viên</h4><p class="text-sm text-slate-500 mt-2"><strong>Ưu điểm:</strong> <span class="text-green-600">Chi phí = 0 đồng.</span></p><p class="text-sm text-slate-500"><strong>Nhược điểm:</strong> <span class="text-red-600">Thiếu chuyên nghiệp,</span> dễ xao nhãng.</p></div></div></section>
-                            <section id="cafe-6" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-box-open mr-3 kv-blue-text"></i>6. Gói Phần cứng Hoàn chỉnh</h2><div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6"><div class="border rounded-lg p-4 bg-white"><h4 class="font-bold flex items-center"><i class="fa-solid fa-laptop-code mr-2 text-slate-500"></i>Combo 1: Gói TIẾT KIỆM</h4><ul class="text-sm mt-2 list-disc list-inside space-y-1"><li><strong>Trạm chính:</strong> Bộ PC có sẵn.</li><li><strong>Order di động:</strong> Điện thoại nhân viên.</li><li><strong>Thiết bị Bar:</strong> Máy in Bếp, Máy in Tem.</li><li><strong>Thu ngân:</strong> Máy in bill, Ngăn kéo, Màn hình QR.</li></ul></div><div class="border-2 kv-blue-border rounded-lg p-4 bg-blue-50 relative"><span class="absolute top-0 right-0 -mt-3 -mr-3 kv-blue-bg text-white text-xs font-bold px-3 py-1 rounded-full">Khuyến nghị</span><h4 class="font-bold flex items-center"><i class="fa-solid fa-gem mr-2 kv-blue-text"></i>Combo 2: Gói CHUYÊN NGHIỆP</h4><ul class="text-sm mt-2 list-disc list-inside space-y-1"><li><strong>Trạm chính:</strong> Máy POS Chuyên dụng.</li><li><strong>Order di động:</strong> 2 Tablet chuyên dụng.</li><li><strong>Thiết bị Bar:</strong> Máy in Bếp, Máy in Tem.</li><li><strong>Thu ngân:</strong> Ngăn kéo, Màn hình QR.</li></ul></div></div></section>
-                            <section id="cafe-7" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-network-wired mr-3 kv-blue-text"></i>7. Setup Thiết bị Mạng</h2><div class="mt-4 overflow-x-auto"><table class="custom-table"><thead><tr><th>Phương án</th><th>Ưu điểm</th><th>Nhược điểm</th></tr></thead><tbody><tr class="bg-red-50 text-red-700"><td><strong>TỐI THIỂU</strong> (Router + Repeater)</td><td>Tiết kiệm.</td><td><strong>Rủi ro cao nhất.</strong> Mạng yếu, chập chờn, không ổn định.</td></tr><tr class="bg-green-50 text-green-700"><td><strong>KHUYẾN NGHỊ</strong> (Cân bằng tải + PoE + 3 AP)</td><td><strong>Ổn định 95%.</strong> Chịu tải tốt, có mạng dự phòng, phủ sóng đều.</td><td>Chi phí cao hơn.</td></tr><tr class="bg-blue-50 text-blue-700"><td><strong>CAO CẤP</strong> (Hệ thống Roaming)</td><td><strong>Ổn định 99.9%.</strong> Di chuyển không ngắt kết nối.</td><td>Chi phí cao.</td></tr></tbody></table></div><blockquote class="mt-6 border-l-4 kv-blue-border bg-slate-100 p-4 italic text-slate-700 rounded-r-lg"><strong>Tư vấn Kỹ thuật:</strong> Để đảm bảo tốc độ in nhanh nhất, <strong>Trạm Thu ngân chính</strong>, <strong>Máy in Bếp</strong> và <strong>Máy in Tem</strong> phải được <code>cắm dây mạng (LAN)</code>.</blockquote></section>
-                            <section id="cafe-8" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-cogs mr-3 kv-blue-text"></i>8. Quy trình Thiết lập & Chuyển giao</h2><div class="mt-6 space-y-4"><p><i class="fas fa-user-edit mr-2 text-green-500"></i><strong>Đào tạo Phục vụ:</strong> Xử lý Topping/Ghi chú (Giải quyết Nỗi đau 1). Khi nhân viên chọn món, KiotViet <strong>tự động hiển thị các lựa chọn</strong>.</p><p><i class="fas fa-dollar-sign mr-2 text-green-500"></i><strong>Đào tạo Thu ngân:</strong> Thanh toán QR (Giải quyết Nỗi đau 4). Máy POS <strong>TỰ ĐỘNG BÁO ĐÃ NHẬN TIỀN</strong>.</p><p><i class="fas fa-chart-pie mr-2 text-green-500"></i><strong>Đào tạo Quản lý:</strong> Dùng App KiotViet Quản lý, cài đặt <strong>Định lượng NVL</strong> (Giải quyết Nỗi đau 5).</p></div></section>
-                            <section id="cafe-9" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-chart-line mr-3 kv-blue-text"></i>9. Tính toán Lợi tức Đầu tư (ROI)</h2><div class="mt-6 bg-green-50 border-l-4 border-green-500 text-green-800 p-4 rounded-r-lg" role="alert"><h4 class="font-bold flex items-center"><i class="fa-solid fa-piggy-bank mr-2"></i>Lợi ích thu về hàng tháng</h4><ul class="list-disc list-inside mt-2 space-y-1"><li><strong>Giảm Chi phí Sai hỏng:</strong> Tiết kiệm <strong>~4.500.000đ/tháng</strong>.</li><li><strong>Tăng Hiệu suất Phục vụ:</strong> Tăng doanh thu <strong>~15.000.000đ/tháng</strong>.</li><li><strong>Giảm Thất thoát NVL:</strong> Tiết kiệm thêm <strong>3-5%</strong> chi phí vốn.</li></ul><hr class="my-2 border-green-200"><p class="font-bold">Tổng lợi ích: ~19.500.000đ/tháng. Thu hồi vốn chỉ sau 2-3 tháng.</p></div></section>
-                            <section id="cafe-10" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-rocket mr-3 kv-blue-text"></i>10. Tư vấn Vận hành Nâng cao</h2><ul class="mt-4 list-disc list-inside space-y-2"><li><strong>Dùng Thẻ rung:</strong> Tiết kiệm 100% nhân viên phục vụ (chạy bàn).</li><li><strong>Thực đơn điện tử (QR Order tại bàn):</strong> Giảm tải cho nhân viên giờ cao điểm.</li><li><strong>Kết nối Ứng dụng Giao hàng:</strong> Đơn hàng tự động đồng bộ vào máy POS.</li></ul></section>
+                            <div class="flex justify-between mb-1 border-b border-gray-100 pb-1">
+                                <span class="text-gray-600">Phần cứng (POS D68, In Bill, In Bếp, Két):</span>
+                                <span class="font-medium">~10.710.000đ</span>
+                            </div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-600">Hạ tầng mạng:</span>
+                                <span class="font-medium">~2.000.000đ</span>
+                            </div>
+                            <div class="flex justify-between mt-2 pt-2 border-t border-gray-300">
+                                <span class="font-bold text-gray-800">TỔNG VỐN:</span>
+                                <span class="font-bold text-red-600">~20.150.000đ</span>
+                            </div>
+                        </div>
+                        <div class="bg-green-50 p-3 rounded mb-3">
+                            <h4 class="font-bold text-green-800 text-xs mb-2 uppercase">Hiệu quả kinh tế (Tháng)</h4>
+                            <div class="flex justify-between text-xs mb-1">
+                                <span>Tăng doanh thu (Vòng quay bàn):</span> <span>+3.000.000đ</span>
+                            </div>
+                            <div class="flex justify-between text-xs mb-1">
+                                <span>Chống thất thoát (Trà đá/Quẩy):</span> <span>+1.000.000đ</span>
+                            </div>
+                            <div class="flex justify-between text-xs mb-1">
+                                <span>Tiết kiệm nhân sự:</span> <span>+5.000.000đ</span>
+                            </div>
+                            <div class="flex justify-between font-bold text-green-700 mt-1 pt-1 border-t border-green-200">
+                                <span>Tổng lợi ích:</span> <span>+9.000.000đ</span>
+                            </div>
+                        </div>
+                        <div class="bg-blue-100 text-blue-800 rounded px-3 py-2 text-center font-bold text-sm">
+                            Hoàn vốn sau ~2.2 tháng
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- =================================================================== -->
-            <!-- TAB CONTENT 2: NHÀ HÀNG CAO CẤP -->
-            <!-- =================================================================== -->
-            <div id="content-finedining" class="tab-content-panel hidden">
-                 <!-- JS will inject content here -->
+            <h2 class="section-header"><i class="fa-solid fa-microchip"></i>II. Phân tích & Đề xuất Thiết bị Hạ tầng</h2>
+            <div class="bg-white rounded-lg shadow-sm p-6 mb-6 text-content">
+                <h4 class="font-bold text-lg text-blue-800 mb-2">1. Tư vấn Mô hình Vận hành</h4>
+                <p><strong>Mô hình đề xuất: Order Mobile + In Bếp qua LAN.</strong></p>
+                <p>Lý do: Với lượng khách đông vào giờ cao điểm, nhân viên cần dùng điện thoại order tại bàn để giảm thời gian di chuyển. Lệnh in cần đi qua dây mạng (LAN) xuống bếp để đảm bảo độ trễ thấp nhất và không bị mất phiếu.</p>
+                
+                <h4 class="font-bold text-lg text-blue-800 mb-2 mt-6">2. Đề xuất Thiết bị Phần cứng</h4>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li><strong>Tại Quầy Thu ngân (Trung tâm xử lý):</strong>
+                        <ul class="list-circle pl-5 mt-1">
+                            <li><strong>Máy POS D68 Dual:</strong> Màn hình cảm ứng điện dung mượt mà giúp thao tác nhanh gấp 3 lần chuột máy tính. Màn hình phụ hiển thị mã QR thanh toán.</li>
+                            <li><strong>Máy in hóa đơn KV804 (USB):</strong> Tốc độ in 260mm/s, cắt giấy tự động, kết nối trực tiếp POS để in bill ổn định.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Tại Bếp nấu (Nhận lệnh chế biến):</strong>
+                        <ul class="list-circle pl-5 mt-1">
+                            <li><strong>Máy in Chế biến KV838 (LAN):</strong> Sử dụng cổng LAN cắm dây mạng để nhận lệnh in từ xa ổn định. Có chuông báo lớn và đèn nháy khi có đơn mới (phù hợp môi trường bếp ồn ào).</li>
+                        </ul>
+                    </li>
+                    <li><strong>Thiết bị Order:</strong> Tận dụng điện thoại thông minh của nhân viên.</li>
+                </ul>
+
+                <h4 class="font-bold text-lg text-blue-800 mb-2 mt-6">3. Tư vấn Hạ tầng mạng (Yếu tố Kỹ thuật)</h4>
+                <p>Để vận hành trơn tru mô hình Mobile Order, hệ thống mạng là "xương sống". Router nhà mạng thông thường không đủ khả năng chịu tải và xử lý luồng dữ liệu in ấn liên tục.</p>
+                <p><strong>Khuyến nghị cấu hình:</strong></p>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li><strong>Thiết bị Router chịu tải (Gateway):</strong> Gợi ý Model <strong>DrayTek Vigor2927</strong> hoặc <strong>MikroTik hEX (RB750Gr3)</strong>. Vai trò: Cấp phát IP (DHCP) và chịu tải cho khoảng 50-80 thiết bị.</li>
+                    <li><strong>Thiết bị Phát Wifi (Access Point):</strong> Gợi ý Model <strong>TP-Link Omada EAP225</strong> hoặc <strong>Aruba Instant On AP11</strong>. Vai trò: Phát sóng Wifi ổn định, hỗ trợ tính năng Roaming.</li>
+                    <li><strong>Switch:</strong> Kết nối các máy in LAN và POS vào mạng nội bộ với tốc độ Gigabit.</li>
+                    <li><strong>Cấu hình kỹ thuật:</strong> Tách 2 tên Wifi riêng biệt (SSID Nội bộ cho POS/Máy in và SSID Guest cho khách hàng) để tránh nghẽn mạng.</li>
+                </ul>
             </div>
 
-            <!-- ... Các Tab Content Panel còn lại sẽ được chèn vào đây ... -->
-            <div id="content-midrange" class="tab-content-panel hidden"></div>
-            <div id="content-buffet" class="tab-content-panel hidden"></div>
-            <div id="content-fastfood" class="tab-content-panel hidden"></div>
-            <div id="content-local" class="tab-content-panel hidden"></div>
-            <div id="content-canteen" class="tab-content-panel hidden"></div>
+            <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <div>
+                    <h2 class="section-header"><i class="fa-solid fa-toggle-on"></i>III. Thao Tác Cơ Bản</h2>
+                    <div class="bg-white rounded-lg shadow-sm p-4 space-y-4 text-sm">
+                        <div><strong class="text-green-700">1. Thiết lập Menu:</strong> Tạo món "Phở Bò", thêm ghi chú nhanh "Không hành", "Nước béo".</div>
+                        <div><strong class="text-green-700">2. Order & Báo Bếp:</strong> Chọn món trên điện thoại > Bấm "Thông báo" > Bếp in phiếu.</div>
+                        <div><strong class="text-green-700">3. Thanh toán:</strong> Chọn "Chuyển khoản", hiện QR đúng số tiền.</div>
+                    </div>
+                </div>
+                <div>
+                    <h2 class="section-header"><i class="fa-solid fa-mobile-screen"></i>IV. Sử dụng App & POS</h2>
+                    <div class="bg-white rounded-lg shadow-sm p-4 space-y-4 text-sm">
+                        <ul class="list-disc pl-4 space-y-2 text-gray-600">
+                            <li><strong>App Chủ Quán:</strong> Xem doanh thu thực tế, nhận thông báo "ting ting" tiền về tài khoản.</li>
+                            <li><strong>App Nhân Viên:</strong> Order tại bàn, gửi bếp từ xa, không cần chạy đi lại.</li>
+                            <li><strong>Máy POS:</strong> Xử lý gộp bàn, chuyển bàn, quét mã vạch nước ngọt siêu tốc.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TOPIC 2: CAFE & TRA SUA -->
+        <div id="topic2" class="content-section max-w-5xl mx-auto">
+            <div class="bg-white rounded-xl shadow-sm p-6 mb-6 border-t-4 border-orange-500">
+                <div class="flex items-center justify-between mb-4">
+                    <h1 class="text-2xl md:text-3xl font-bold text-gray-800"><i class="fa-solid fa-mug-hot mr-3 text-orange-600"></i>Mô Hình Cafe & Trà Sữa</h1>
+                    <span class="bg-orange-100 text-orange-800 text-xs font-bold px-3 py-1 rounded-full uppercase">Highland Garden</span>
+                </div>
+            </div>
+            <img src="https://anviethouse.vn/wp-content/uploads/2022/05/Thiet-ke-quan-tra-sua-2-3.jpg" alt="Cafe Tra Sua" class="hero-image">
+
+            <h2 class="section-header"><i class="fa-solid fa-layer-group"></i>I. Tổng Quan & Phân Tích</h2>
+            <div class="bg-white rounded-lg shadow-sm p-6 mb-6 text-content">
+                <h3 class="font-bold text-lg mb-3">1. Phân tích Tổng quan Ngành</h3>
+                <p>Ngành kinh doanh Cafe và Trà sữa tại Việt Nam có đặc thù là tốc độ phục vụ cực nhanh và tính cá nhân hóa sản phẩm rất cao. Một ly trà sữa không chỉ đơn thuần là trà sữa, mà còn đi kèm hàng loạt tùy chọn như: 30% đường, 50% đá, thêm trân châu trắng, bỏ thạch dừa... Nếu không quản lý tốt, việc pha chế sai yêu cầu là điều thường xuyên xảy ra.</p>
+                <p>Ngoài ra, đây là ngành chịu tác động mạnh mẽ nhất từ xu hướng đặt món trực tuyến (Food Delivery). Việc quản lý hàng loạt đơn hàng nổ liên tục từ GrabFood, ShopeeFood vào giờ cao điểm là một cơn ác mộng thực sự nếu phải nhập liệu thủ công.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <div class="bg-white rounded-lg shadow-sm p-6">
+                    <h3 class="font-bold text-lg mb-4 border-b pb-2">Chân dung mô hình mẫu</h3>
+                    <div class="grid grid-cols-2 gap-4 text-sm">
+                        <div><span class="text-gray-500">Quy mô:</span> <span class="font-medium">150m2 (Vườn + Máy lạnh)</span></div>
+                        <div><span class="text-gray-500">Menu:</span> <span class="font-medium">Trà sữa (In tem), Cafe máy</span></div>
+                        <div class="col-span-2"><span class="text-gray-500">Vấn đề:</span> <span class="font-medium">Sai topping, thất thoát, loạn đơn App.</span></div>
+                    </div>
+                </div>
+                <div class="roi-card rounded-lg shadow-sm overflow-hidden flex flex-col">
+                    <div class="roi-header p-4">
+                        <h3 class="font-bold text-lg"><i class="fa-solid fa-calculator mr-2"></i>Bài Toán Đầu Tư</h3>
+                        <p class="text-xs opacity-90">Gói Chuyên Nghiệp (2 Năm)</p>
+                    </div>
+                    <div class="p-4 text-sm flex-1 flex flex-col justify-between">
+                        <div class="mb-4">
+                            <div class="flex justify-between mb-1 border-b border-gray-100 pb-1">
+                                <span class="text-gray-600">Phần mềm (2 năm):</span>
+                                <span class="font-medium">~7.440.000đ</span>
+                            </div>
+                            <div class="flex justify-between mb-1 border-b border-gray-100 pb-1">
+                                <span class="text-gray-600">Phần cứng (POS, Tem, In):</span>
+                                <span class="font-medium">~10.710.000đ</span>
+                            </div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-600">Hạ tầng Mesh Wifi:</span>
+                                <span class="font-medium">~3.000.000đ</span>
+                            </div>
+                            <div class="flex justify-between mt-2 pt-2 border-t border-gray-300">
+                                <span class="font-bold text-gray-800">TỔNG VỐN:</span>
+                                <span class="font-bold text-red-600">~21.150.000đ</span>
+                            </div>
+                        </div>
+                        <div class="bg-green-50 p-3 rounded mb-3">
+                            <h4 class="font-bold text-green-800 text-xs mb-2 uppercase">Hiệu quả kinh tế (Tháng)</h4>
+                            <div class="flex justify-between text-xs mb-1">
+                                <span>Chống thất thoát Topping:</span> <span>+2.000.000đ</span>
+                            </div>
+                            <div class="flex justify-between text-xs mb-1">
+                                <span>Tiết kiệm nhân sự App:</span> <span>+3.000.000đ</span>
+                            </div>
+                            <div class="flex justify-between text-xs mb-1">
+                                <span>Tăng tốc độ phục vụ:</span> <span>+3.000.000đ</span>
+                            </div>
+                            <div class="flex justify-between font-bold text-green-700 mt-1 pt-1 border-t border-green-200">
+                                <span>Tổng lợi ích:</span> <span>+8.000.000đ</span>
+                            </div>
+                        </div>
+                        <div class="bg-blue-100 text-blue-800 rounded px-3 py-2 text-center font-bold text-sm">
+                            Hoàn vốn sau ~2.7 tháng
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-header"><i class="fa-solid fa-microchip"></i>II. Phân tích & Đề xuất Thiết bị Hạ tầng</h2>
+            <div class="bg-white rounded-lg shadow-sm p-6 mb-6 text-content">
+                <h4 class="font-bold text-lg text-blue-800 mb-2">1. Tư vấn Mô hình Vận hành</h4>
+                <p><strong>Mô hình: Kết hợp Mobile Order (sân vườn) và Order tại quầy.</strong></p>
+                <p>Thiết bị bắt buộc: <strong>Máy in Tem nhãn</strong> đặt tại quầy pha chế để dán lên ly, giúp chuẩn hóa quy trình pha chế và loại bỏ sai sót.</p>
+
+                <h4 class="font-bold text-lg text-blue-800 mb-2 mt-6">2. Đề xuất Thiết bị Phần cứng</h4>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li><strong>Tại Quầy Thu ngân (Trung tâm):</strong>
+                        <ul class="list-circle pl-5 mt-1">
+                            <li><strong>Máy POS D68 Dual:</strong> Màn hình cảm ứng giúp thao tác chọn topping nhanh chóng. Màn hình phụ hiển thị mã QR thanh toán.</li>
+                            <li><strong>Máy in hóa đơn KV804:</strong> In phiếu thanh toán.</li>
+                            <li><strong>Máy in Tem nhãn 365B (Cổng LAN/USB):</strong> Thiết bị quan trọng nhất. Sử dụng cổng LAN nếu quầy pha chế đặt xa thu ngân để đảm bảo kết nối ổn định.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Thiết bị Order:</strong> Tận dụng điện thoại nhân viên để phục vụ khách khu vực sân vườn.</li>
+                </ul>
+
+                <h4 class="font-bold text-lg text-blue-800 mb-2 mt-6">3. Tư vấn Hạ tầng mạng (Yếu tố Kỹ thuật)</h4>
+                <p>Mô hình quán có sân vườn và khách hàng trẻ (thường xuyên chơi game, xem video) đòi hỏi hạ tầng mạng mạnh mẽ và vùng phủ sóng rộng.</p>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li><strong>Router chịu tải (Gateway):</strong> Gợi ý Model <strong>DrayTek Vigor2927</strong> hoặc <strong>MikroTik hEX S</strong>. Vai trò: Chịu tải cho 80-100 user đồng thời.</li>
+                    <li><strong>Hệ thống Wifi (Access Point):</strong> Gợi ý Model Hệ thống <strong>Mesh Wifi</strong> (như <strong>TP-Link Deco X50</strong> hoặc <strong>Tenda Nova MW6</strong>). Vai trò: Tạo mạng lưới sóng liền mạch (Mesh) giữa trong nhà và ngoài vườn. Hỗ trợ tính năng <strong>Roaming</strong> giúp nhân viên di chuyển order từ trong nhà ra sân vườn không bị rớt mạng.</li>
+                    <li><strong>Cấu hình kỹ thuật:</strong> Phân tách mạng Nội bộ (POS/In ấn) và mạng Khách (Guest) để bảo mật và ưu tiên băng thông cho hệ thống bán hàng.</li>
+                </ul>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <div>
+                    <h2 class="section-header"><i class="fa-solid fa-toggle-on"></i>III. Thao Tác Cơ Bản</h2>
+                    <div class="bg-white rounded-lg shadow-sm p-4 space-y-4 text-sm">
+                        <div><strong class="text-orange-700">1. Thiết lập Thuộc tính:</strong> Tạo nhóm Đường (30%, 50%), Đá. Gán Trân châu làm món ăn kèm.</div>
+                        <div><strong class="text-orange-700">2. Order & In Tem:</strong> Chọn món > Chọn đường đá > In tem dán ly.</div>
+                        <div><strong class="text-orange-700">3. Thanh toán:</strong> Quét mã QR hoặc tiền mặt. In hóa đơn cho khách.</div>
+                    </div>
+                </div>
+                <div>
+                    <h2 class="section-header"><i class="fa-solid fa-mobile-screen"></i>IV. Sử dụng App & POS</h2>
+                    <div class="bg-white rounded-lg shadow-sm p-4 space-y-4 text-sm">
+                        <ul class="list-disc pl-4 space-y-2 text-gray-600">
+                            <li><strong>App Chủ:</strong> Theo dõi món bán chạy (Trà hay Cafe), kiểm kho từ xa.</li>
+                            <li><strong>App Nhân viên:</strong> Order tại bàn cho khách ở khu vực sân vườn. Chọn topping, ghi chú đường đá chi tiết ngay trên điện thoại.</li>
+                            <li><strong>POS:</strong> Màn hình cảm ứng chuyên dụng cho việc chọn Topping/Thuộc tính nhanh chóng. Hiển thị Pop-up đơn hàng mới từ các ứng dụng giao đồ ăn (Food Apps).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TOPIC 3: BILLIARDS -->
+        <div id="topic3" class="content-section max-w-5xl mx-auto">
+             <div class="bg-white rounded-xl shadow-sm p-6 mb-6 border-t-4 border-purple-600">
+                <div class="flex items-center justify-between mb-4">
+                    <h1 class="text-2xl md:text-3xl font-bold text-gray-800"><i class="fa-solid fa-bowling-ball mr-3 text-purple-600"></i>Mô Hình Billiards (Bida)</h1>
+                    <span class="bg-purple-100 text-purple-800 text-xs font-bold px-3 py-1 rounded-full uppercase">The One Club</span>
+                </div>
+            </div>
+            <img src="https://cdn-media.sforum.vn/storage/app/media/ctv_seo10/quan-bida-gan-day-3.jpg" alt="Billiards" class="hero-image">
+
+            <h2 class="section-header"><i class="fa-solid fa-layer-group"></i>I. Tổng Quan & Phân Tích</h2>
+            <div class="bg-white rounded-lg shadow-sm p-6 mb-6 text-content">
+                <h3 class="font-bold text-lg mb-3">1. Phân tích Tổng quan Ngành</h3>
+                <p>Kinh doanh Billiards (Bida) là sự kết hợp thú vị giữa dịch vụ <strong>"Thuê thiết bị/không gian theo giờ"</strong> và <strong>"Dịch vụ ăn uống (F&B)"</strong>. Khách hàng thường chơi thời gian dài (trung bình 1-3 tiếng) và biên độ lợi nhuận từ tiền giờ là rất cao. Tuy nhiên, "lỗ hổng" lớn nhất nằm ở việc kiểm soát nhân viên. Nếu không có công cụ giám sát, nhân viên rất dễ gian lận giờ chơi (thu tiền túi) hoặc thất thoát đồ uống, gây thiệt hại doanh thu nghiêm trọng.</p>
+            </div>
+
+             <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <div class="bg-white rounded-lg shadow-sm p-6">
+                    <h3 class="font-bold text-lg mb-4 border-b pb-2">Chân dung mô hình mẫu</h3>
+                    <div class="grid grid-cols-2 gap-4 text-sm">
+                        <div><span class="text-gray-500">Quy mô:</span> <span class="font-medium">300m2, 15 bàn</span></div>
+                        <div><span class="text-gray-500">Menu:</span> <span class="font-medium">Giờ (80k/h), Bia, Thuốc lá</span></div>
+                        <div class="col-span-2"><span class="text-gray-500">Vấn đề:</span> <span class="font-medium">Bật đèn không bật máy, khách lười gọi đồ.</span></div>
+                    </div>
+                </div>
+                 <div class="roi-card rounded-lg shadow-sm overflow-hidden flex flex-col">
+                    <div class="roi-header p-4">
+                        <h3 class="font-bold text-lg"><i class="fa-solid fa-calculator mr-2"></i>Bài Toán Đầu Tư</h3>
+                        <p class="text-xs opacity-90">Gói Chuyên Nghiệp (2 Năm)</p>
+                    </div>
+                    <div class="p-4 text-sm flex-1 flex flex-col justify-between">
+                        <div class="mb-4">
+                            <div class="flex justify-between mb-1 border-b border-gray-100 pb-1">
+                                <span class="text-gray-600">Phần mềm (2 năm):</span>
+                                <span class="font-medium">~7.440.000đ</span>
+                            </div>
+                            <div class="flex justify-between mb-1 border-b border-gray-100 pb-1">
+                                <span class="text-gray-600">Phần cứng (Full bộ):</span>
+                                <span class="font-medium">~10.710.000đ</span>
+                            </div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-600">Hạ tầng (AP ốp trần):</span>
+                                <span class="font-medium">~3.000.000đ</span>
+                            </div>
+                            <div class="flex justify-between mt-2 pt-2 border-t border-gray-300">
+                                <span class="font-bold text-gray-800">TỔNG VỐN:</span>
+                                <span class="font-bold text-red-600">~21.150.000đ</span>
+                            </div>
+                        </div>
+                        <div class="bg-green-50 p-3 rounded mb-3">
+                            <h4 class="font-bold text-green-800 text-xs mb-2 uppercase">Hiệu quả kinh tế (Tháng)</h4>
+                            <div class="flex justify-between text-xs mb-1">
+                                <span>Chống gian lận giờ:</span> <span>+2.400.000đ</span>
+                            </div>
+                            <div class="flex justify-between text-xs mb-1">
+                                <span>Tăng bán F&B:</span> <span>+3.000.000đ</span>
+                            </div>
+                            <div class="flex justify-between text-xs mb-1">
+                                <span>Tiết kiệm nhân sự:</span> <span>+5.000.000đ</span>
+                            </div>
+                            <div class="flex justify-between font-bold text-green-700 mt-1 pt-1 border-t border-green-200">
+                                <span>Tổng lợi ích:</span> <span>+10.400.000đ</span>
+                            </div>
+                        </div>
+                        <div class="bg-blue-100 text-blue-800 rounded px-3 py-2 text-center font-bold text-sm">
+                            Hoàn vốn sau ~2 tháng
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+             <h2 class="section-header"><i class="fa-solid fa-microchip"></i>II. Phân tích & Đề xuất Thiết bị Hạ tầng</h2>
+             <div class="bg-white rounded-lg shadow-sm p-6 mb-6 text-content">
+                <h4 class="font-bold text-lg text-blue-800 mb-2">1. Tư vấn Mô hình Vận hành</h4>
+                <p><strong>Mô hình: Order Mobile + In qua LAN.</strong></p>
+                <p>Lý do: Do diện tích quán rộng (300m2) và ồn ào, nhân viên di chuyển liên tục. Việc order bằng điện thoại và in phiếu xuống quầy Bar/Bếp qua dây mạng LAN giúp tiết kiệm sức người và đảm bảo lệnh in chính xác.</p>
+
+                <h4 class="font-bold text-lg text-blue-800 mb-2 mt-6">2. Đề xuất Thiết bị Phần cứng</h4>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li><strong>Tại Quầy Thu ngân (Kiêm Bar):</strong>
+                        <ul class="list-circle pl-5 mt-1">
+                            <li><strong>Máy POS D68 Dual:</strong> Màn hình phụ hướng về phía khách giúp khách xem rõ <strong>thời gian chơi</strong> và <strong>tổng tiền</strong>, tránh tranh cãi.</li>
+                            <li><strong>Máy in hóa đơn KV804 (USB):</strong> In bill tính tiền.</li>
+                            <li><strong>Ngăn kéo đựng tiền KV405:</strong> Tự động mở khi thanh toán.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Tại Khu vực Bếp (Nếu có bán đồ ăn nóng):</strong> Máy in Chế biến KV838 (LAN) nhận lệnh in từ xa.</li>
+                    <li><strong>Thiết bị Order:</strong> Tận dụng điện thoại cá nhân của nhân viên.</li>
+                </ul>
+
+                <h4 class="font-bold text-lg text-blue-800 mb-2 mt-6">3. Tư vấn Hạ tầng mạng (Yếu tố Kỹ thuật)</h4>
+                <p>Thách thức lớn nhất của quán Bida là không gian rộng và nhiều vật cản, sóng Wifi từ modem nhà mạng không thể phủ hết.</p>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li><strong>Router chịu tải (Gateway):</strong> Gợi ý Model <strong>DrayTek Vigor2927</strong> hoặc <strong>MikroTik RB750Gr3</strong>. Vai trò: Cấp phát IP ổn định cho lượng lớn thiết bị.</li>
+                    <li><strong>Access Point ốp trần (AP):</strong> Gợi ý Model <strong>TP-Link Omada EAP225/245</strong> hoặc <strong>Aruba Instant On AP11/12</strong>. Cần 02-03 thiết bị lắp ốp trần rải đều dọc chiều dài quán. Vai trò: Phủ sóng toàn bộ khu vực bàn chơi. Tính năng Roaming giúp nhân viên đi từ đầu quán đến cuối quán order mà không mất kết nối.</li>
+                    <li><strong>Switch PoE:</strong> Cấp nguồn và tín hiệu mạng cho các Access Point và Máy in LAN, giúp đi dây gọn gàng.</li>
+                </ul>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <div>
+                    <h2 class="section-header"><i class="fa-solid fa-toggle-on"></i>III. Thao Tác Cơ Bản</h2>
+                    <div class="bg-white rounded-lg shadow-sm p-4 space-y-4 text-sm">
+                        <div><strong class="text-purple-700">1. Khởi tạo Bàn & Giá:</strong> Tạo 15 bàn. Tạo dịch vụ "Giờ Pool" tính tiền theo thời gian.</div>
+                        <div><strong class="text-purple-700">2. Check-in & Order:</strong> Chọn Bàn > Bắt đầu. Order thêm bia ngay trên điện thoại.</div>
+                        <div><strong class="text-purple-700">3. Thanh toán:</strong> Bấm Thanh toán > Máy tự dừng giờ và tính tổng tiền.</div>
+                    </div>
+                </div>
+                <div>
+                    <h2 class="section-header"><i class="fa-solid fa-mobile-screen"></i>IV. Sử dụng App & POS</h2>
+                    <div class="bg-white rounded-lg shadow-sm p-4 space-y-4 text-sm">
+                         <ul class="list-disc pl-4 space-y-2 text-gray-600">
+                            <li><strong>App Chủ:</strong> Giám sát trạng thái bàn theo thời gian thực (Bàn nào đang sáng đèn xanh trên App phải có khách thực tế qua Camera). Xem báo cáo doanh thu tiền giờ và tiền dịch vụ riêng biệt.</li>
+                            <li><strong>App Nhân viên:</strong> Di chuyển quanh bàn bida để order đồ uống, thuốc lá cho khách. Kiểm tra nhanh thời gian khách đã chơi để thông báo nếu khách hỏi.</li>
+                            <li><strong>POS:</strong> Màn hình sơ đồ bàn trực quan giúp quản lý bao quát toàn bộ CLB. Hiển thị đồng hồ đếm giờ chạy thời gian thực.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TOPIC 4: KARAOKE -->
+        <div id="topic4" class="content-section max-w-5xl mx-auto">
+            <div class="bg-white rounded-xl shadow-sm p-6 mb-6 border-t-4 border-pink-500">
+                <div class="flex items-center justify-between mb-4">
+                    <h1 class="text-2xl md:text-3xl font-bold text-gray-800"><i class="fa-solid fa-microphone-lines mr-3 text-pink-500"></i>Mô Hình Karaoke</h1>
+                    <span class="bg-pink-100 text-pink-800 text-xs font-bold px-3 py-1 rounded-full uppercase">Melody Karaoke</span>
+                </div>
+            </div>
+            <img src="https://phongnhaexplorer.com/wp-content/uploads/karaoke-dong-hoi.jpg" alt="Karaoke" class="hero-image">
+
+            <h2 class="section-header"><i class="fa-solid fa-layer-group"></i>I. Tổng Quan & Phân Tích</h2>
+            <div class="bg-white rounded-lg shadow-sm p-6 mb-6 text-content">
+                <h3 class="font-bold text-lg mb-3">1. Phân tích Tổng quan Ngành</h3>
+                <p>Kinh doanh Karaoke có đặc thù rất riêng là bán "Thời gian" làm sản phẩm cốt lõi, đi kèm với dịch vụ ăn uống (F&B). Khách hàng thường đi theo nhóm vào các khung giờ giải trí cao điểm (tối, cuối tuần) và cực kỳ nhạy cảm với sự minh bạch trong tính toán giờ chơi.</p>
+                <p>Yếu tố sống còn của mô hình này là <strong>Quản lý thời gian chính xác</strong> và <strong>Chống thất thoát</strong>. Do đặc thù phòng hát kín và riêng tư, chủ quán rất khó giám sát trực tiếp nhân viên, tạo ra nhiều khe hở cho việc gian lận giờ hát hoặc tuồn đồ uống từ ngoài vào.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 mb-8">
+                 <div class="bg-white rounded-lg shadow-sm p-6">
+                    <h3 class="font-bold text-lg mb-4 border-b pb-2">Chân dung mô hình mẫu</h3>
+                    <div class="grid grid-cols-2 gap-4 text-sm">
+                        <div><span class="text-gray-500">Quy mô:</span> <span class="font-medium">3 Tầng, 10 Phòng</span></div>
+                        <div><span class="text-gray-500">Menu:</span> <span class="font-medium">Giờ hát, Bia tháp, Trái cây</span></div>
+                        <div class="col-span-2"><span class="text-gray-500">Vấn đề:</span> <span class="font-medium">Sóng Wifi yếu, Nhân viên sửa giờ.</span></div>
+                    </div>
+                </div>
+                <div class="roi-card rounded-lg shadow-sm overflow-hidden flex flex-col">
+                    <div class="roi-header p-4">
+                        <h3 class="font-bold text-lg"><i class="fa-solid fa-calculator mr-2"></i>Bài Toán Đầu Tư</h3>
+                        <p class="text-xs opacity-90">Gói Chuyên Nghiệp (2 Năm)</p>
+                    </div>
+                    <div class="p-4 text-sm flex-1 flex flex-col justify-between">
+                        <div class="mb-4">
+                            <div class="flex justify-between mb-1 border-b border-gray-100 pb-1">
+                                <span class="text-gray-600">Phần mềm (2 năm):</span>
+                                <span class="font-medium">~7.440.000đ</span>
+                            </div>
+                            <div class="flex justify-between mb-1 border-b border-gray-100 pb-1">
+                                <span class="text-gray-600">Phần cứng (POS, In, Két):</span>
+                                <span class="font-medium">~10.710.000đ</span>
+                            </div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-600">Mạng (AP từng tầng):</span>
+                                <span class="font-medium">~3.000.000đ</span>
+                            </div>
+                            <div class="flex justify-between mt-2 pt-2 border-t border-gray-300">
+                                <span class="font-bold text-gray-800">TỔNG VỐN:</span>
+                                <span class="font-bold text-red-600">~21.150.000đ</span>
+                            </div>
+                        </div>
+                        <div class="bg-green-50 p-3 rounded mb-3">
+                            <h4 class="font-bold text-green-800 text-xs mb-2 uppercase">Hiệu quả kinh tế (Tháng)</h4>
+                            <div class="flex justify-between text-xs mb-1">
+                                <span>Chống gian lận giờ:</span> <span>+4.500.000đ</span>
+                            </div>
+                            <div class="flex justify-between text-xs mb-1">
+                                <span>Tiết kiệm nhân sự:</span> <span>+3.000.000đ</span>
+                            </div>
+                            <div class="flex justify-between text-xs mb-1">
+                                <span>Kiểm soát kho:</span> <span>+2.000.000đ</span>
+                            </div>
+                            <div class="flex justify-between font-bold text-green-700 mt-1 pt-1 border-t border-green-200">
+                                <span>Tổng lợi ích:</span> <span>+9.500.000đ</span>
+                            </div>
+                        </div>
+                        <div class="bg-blue-100 text-blue-800 rounded px-3 py-2 text-center font-bold text-sm">
+                            Hoàn vốn sau ~2.3 tháng
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-header"><i class="fa-solid fa-microchip"></i>II. Phân tích & Đề xuất Thiết bị Hạ tầng</h2>
+            <div class="bg-white rounded-lg shadow-sm p-6 mb-6 text-content">
+                <h4 class="font-bold text-lg text-blue-800 mb-2">1. Tư vấn Mô hình Vận hành</h4>
+                <p><strong>Mô hình: Order Mobile + In qua LAN.</strong></p>
+                <p>Lý do: Bếp/Bar thường nằm tách biệt ở tầng trệt, trong khi phòng hát ở các tầng trên. Việc nhân viên dùng điện thoại gửi lệnh in xuống bếp qua mạng LAN là bắt buộc để đảm bảo tốc độ và không làm phiền khách nhiều lần.</p>
+
+                <h4 class="font-bold text-lg text-blue-800 mb-2 mt-6">2. Đề xuất Thiết bị Phần cứng</h4>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li><strong>Tại Quầy Thu ngân (Lễ tân):</strong> Máy POS D68 Dual (Khuyên dùng) để màn hình phụ hiển thị chi tiết giờ vào/ra, tăng tính minh bạch. Máy in hóa đơn KV804 (USB).</li>
+                    <li><strong>Tại Khu vực Bếp/Bar (Tầng trệt):</strong> Máy in Chế biến KV838 (Cổng LAN) để nhận lệnh in từ các tầng.</li>
+                    <li><strong>Thiết bị Order:</strong> Tận dụng điện thoại nhân viên.</li>
+                </ul>
+
+                <h4 class="font-bold text-lg text-blue-800 mb-2 mt-6">3. Tư vấn Hạ tầng mạng (Yếu tố Kỹ thuật)</h4>
+                <p>Thách thức lớn nhất của Karaoke là tường phòng hát rất dày (cách âm, tiêu âm), sóng Wifi từ hành lang rất khó xuyên vào trong phòng.</p>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li><strong>Router chịu tải (Gateway):</strong> Gợi ý Model <strong>DrayTek Vigor2927</strong> hoặc <strong>MikroTik hEX S</strong>. Vai trò: Xử lý lưu lượng lớn, đảm bảo IP không bị xung đột.</li>
+                    <li><strong>Access Point (AP) lắp hành lang:</strong> Vị trí lắp đặt bắt buộc tại <strong>Hành lang mỗi tầng</strong>, vị trí đối diện cửa phòng hát. Gợi ý Model <strong>TP-Link Omada EAP225</strong> hoặc <strong>Unifi AC Lite</strong>.</li>
+                    <li><strong>Lưu ý vận hành:</strong> Khi nhân viên vào phòng order, nên đứng gần cửa hoặc mở hé cửa để điện thoại bắt sóng tốt nhất từ hành lang.</li>
+                </ul>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <div>
+                    <h2 class="section-header"><i class="fa-solid fa-toggle-on"></i>III. Thao Tác Cơ Bản</h2>
+                    <div class="bg-white rounded-lg shadow-sm p-4 space-y-4 text-sm">
+                        <div><strong class="text-pink-700">1. Khởi tạo Phòng:</strong> Tạo nhóm Phòng VIP và Phòng Thường.</div>
+                        <div><strong class="text-pink-700">2. Check-in & Order:</strong> Bắt đầu tính giờ. Nhân viên vào phòng order bia trên điện thoại.</div>
+                        <div><strong class="text-pink-700">3. Thanh toán:</strong> Dừng giờ. In hóa đơn chi tiết giờ vào/ra.</div>
+                    </div>
+                </div>
+                 <div>
+                    <h2 class="section-header"><i class="fa-solid fa-mobile-screen"></i>IV. Sử dụng App & POS</h2>
+                    <div class="bg-white rounded-lg shadow-sm p-4 space-y-4 text-sm">
+                         <ul class="list-disc pl-4 space-y-2 text-gray-600">
+                            <li><strong>App Chủ:</strong> Kiểm soát chặt chẽ giờ khách vào/ra thông qua thông báo trên điện thoại, tránh nhân viên sửa giờ. Xem báo cáo tỷ lệ lấp đầy phòng.</li>
+                            <li><strong>App Nhân viên:</strong> Order đồ uống ngay trong phòng hát mà không cần chạy ra ngoài. Kiểm tra nhanh bill tạm tính trên điện thoại để báo khách.</li>
+                            <li><strong>POS:</strong> Màn hình quản lý phòng trực quan, dễ dàng thao tác Chuyển phòng. Màn hình phụ hiển thị chi tiết giờ chơi và mã QR thanh toán.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TOPIC 5: LAU NUONG -->
+        <div id="topic5" class="content-section max-w-5xl mx-auto">
+            <div class="bg-white rounded-xl shadow-sm p-6 mb-6 border-t-4 border-red-500">
+                <div class="flex items-center justify-between mb-4">
+                    <h1 class="text-2xl md:text-3xl font-bold text-gray-800"><i class="fa-solid fa-fire mr-3 text-red-600"></i>Mô Hình Lẩu & Nướng</h1>
+                    <span class="bg-red-100 text-red-800 text-xs font-bold px-3 py-1 rounded-full uppercase">Nhà Hàng Lẩu Nướng Ngon</span>
+                </div>
+            </div>
+            <img src="https://noithatanthinhphat.vn/wp-content/uploads/2024/09/thiet-ke-nha-hang-lau-nuong-8-1024x680.jpg" alt="Lau Nuong" class="hero-image">
+
+             <h2 class="section-header"><i class="fa-solid fa-layer-group"></i>I. Tổng Quan & Phân Tích</h2>
+             <div class="bg-white rounded-lg shadow-sm p-6 mb-6 text-content">
+                <h3 class="font-bold text-lg mb-3">1. Phân tích Tổng quan Ngành</h3>
+                <p>Mô hình Nhà hàng Gọi món (A-la-carte) hoặc Lẩu/Nướng thường phục vụ khách đi theo nhóm, gia đình hoặc tiệc sinh nhật. Đặc thù của mô hình này là thực đơn rất đa dạng, thường kết hợp giữa bán Combo (Set ăn) và bán món lẻ.</p>
+                <p>Quy trình vận hành ở đây phức tạp hơn nhiều so với quán ăn bình dân vì có sự phân chia rõ rệt giữa các bộ phận: Bếp Nóng (chuyên xào nấu), Bếp Lạnh (soạn đồ lẩu/nướng), Quầy Bar (pha chế) và Thu ngân. Bài toán khó nhất là làm sao để khi nhân viên bấm order một bàn tiệc lớn, món ăn phải được in ra đúng bếp, đồ uống in ra đúng bar một cách đồng thời.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 mb-8">
+                 <div class="bg-white rounded-lg shadow-sm p-6">
+                    <h3 class="font-bold text-lg mb-4 border-b pb-2">Chân dung mô hình mẫu</h3>
+                    <div class="grid grid-cols-2 gap-4 text-sm">
+                        <div><span class="text-gray-500">Quy mô:</span> <span class="font-medium">200m2, 30 Bàn</span></div>
+                        <div><span class="text-gray-500">Menu:</span> <span class="font-medium">Combo Lẩu, Nướng, Bia</span></div>
+                        <div class="col-span-2"><span class="text-gray-500">Vấn đề:</span> <span class="font-medium">In ấn lộn xộn giữa Bếp/Bar, khó quản lý kho Combo.</span></div>
+                    </div>
+                </div>
+                <div class="roi-card rounded-lg shadow-sm overflow-hidden flex flex-col">
+                    <div class="roi-header p-4">
+                        <h3 class="font-bold text-lg"><i class="fa-solid fa-calculator mr-2"></i>Bài Toán Đầu Tư</h3>
+                        <p class="text-xs opacity-90">Gói Chuyên Nghiệp (2 Năm)</p>
+                    </div>
+                    <div class="p-4 text-sm flex-1 flex flex-col justify-between">
+                        <div class="mb-4">
+                            <div class="flex justify-between mb-1 border-b border-gray-100 pb-1">
+                                <span class="text-gray-600">Phần mềm (2 năm):</span>
+                                <span class="font-medium">~7.440.000đ</span>
+                            </div>
+                            <div class="flex justify-between mb-1 border-b border-gray-100 pb-1">
+                                <span class="text-gray-600">Phần cứng (POS, 3 In):</span>
+                                <span class="font-medium">~12.110.000đ</span>
+                            </div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-600">Hạ tầng mạng:</span>
+                                <span class="font-medium">~3.000.000đ</span>
+                            </div>
+                            <div class="flex justify-between mt-2 pt-2 border-t border-gray-300">
+                                <span class="font-bold text-gray-800">TỔNG VỐN:</span>
+                                <span class="font-bold text-red-600">~22.550.000đ</span>
+                            </div>
+                        </div>
+                        <div class="bg-green-50 p-3 rounded mb-3">
+                            <h4 class="font-bold text-green-800 text-xs mb-2 uppercase">Hiệu quả kinh tế (Tháng)</h4>
+                            <div class="flex justify-between text-xs mb-1">
+                                <span>Tăng tốc độ ra đồ:</span> <span>+3.000.000đ</span>
+                            </div>
+                            <div class="flex justify-between text-xs mb-1">
+                                <span>Kiểm soát giá vốn:</span> <span>+3.000.000đ</span>
+                            </div>
+                            <div class="flex justify-between text-xs mb-1">
+                                <span>Tiết kiệm nhân sự:</span> <span>+5.000.000đ</span>
+                            </div>
+                            <div class="flex justify-between font-bold text-green-700 mt-1 pt-1 border-t border-green-200">
+                                <span>Tổng lợi ích:</span> <span>+11.000.000đ</span>
+                            </div>
+                        </div>
+                        <div class="bg-blue-100 text-blue-800 rounded px-3 py-2 text-center font-bold text-sm">
+                            Hoàn vốn sau ~2 tháng
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+             <h2 class="section-header"><i class="fa-solid fa-microchip"></i>II. Phân tích & Đề xuất Thiết bị Hạ tầng</h2>
+             <div class="bg-white rounded-lg shadow-sm p-6 mb-6 text-content">
+                <h4 class="font-bold text-lg text-blue-800 mb-2">1. Tư vấn Mô hình Vận hành</h4>
+                <p><strong>Mô hình: Order Mobile + In LAN Đa điểm (Multi-point Printing).</strong></p>
+                <p>Lý do: Nhà hàng có nhiều khu vực chế biến (Bếp, Bar). Cần hệ thống in ấn phân luồng tự động qua mạng LAN để đảm bảo lệnh in chính xác đến từng bộ phận.</p>
+
+                <h4 class="font-bold text-lg text-blue-800 mb-2 mt-6">2. Đề xuất Thiết bị Phần cứng</h4>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li><strong>Tại Quầy Thu ngân (Trung tâm):</strong> Máy POS D68 Dual (Màn hình 15.6 inch quản lý sơ đồ 30 bàn). Máy in hóa đơn KV804.</li>
+                    <li><strong>Tại Khu vực Chế biến (2-3 máy):</strong> 
+                        <ul class="list-circle pl-5 mt-1">
+                            <li>01 máy in KV838 tại Bếp (In đồ ăn).</li>
+                            <li>01 máy in KV838 tại Quầy Bar (In đồ uống).</li>
+                            <li>Bắt buộc dùng dòng máy in LAN để đảm bảo lệnh in không bị thất lạc.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Thiết bị Order:</strong> Tận dụng điện thoại nhân viên.</li>
+                </ul>
+
+                <h4 class="font-bold text-lg text-blue-800 mb-2 mt-6">3. Tư vấn Hạ tầng mạng (Yếu tố Kỹ thuật)</h4>
+                <p>Với diện tích 200m2 và lượng khách đông (100-120 người), hệ thống mạng cần chịu tải tốt và phân tách rõ ràng.</p>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li><strong>Router chịu tải (Gateway):</strong> Gợi ý Model <strong>DrayTek Vigor2927</strong> hoặc <strong>MikroTik RB750Gr3</strong>. Vai trò: Xử lý luồng dữ liệu in ấn liên tục giữa các điện thoại order và nhiều máy in.</li>
+                    <li><strong>Access Point (AP):</strong> Gợi ý Model <strong>TP-Link Omada EAP225</strong> hoặc <strong>Unifi AC Lite</strong>. Cần 02 thiết bị lắp trần để phủ sóng toàn bộ không gian nhà hàng.</li>
+                    <li><strong>Switch:</strong> Kết nối các máy in LAN và POS về Router trung tâm.</li>
+                </ul>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <div>
+                    <h2 class="section-header"><i class="fa-solid fa-toggle-on"></i>III. Thao Tác Cơ Bản</h2>
+                    <div class="bg-white rounded-lg shadow-sm p-4 space-y-4 text-sm">
+                        <div><strong class="text-red-700">1. Thiết lập Phân luồng in:</strong> Cài đặt: Nhóm "Món ăn" in Bếp, nhóm "Đồ uống" in Bar.</div>
+                        <div><strong class="text-red-700">2. Order Combo:</strong> Chọn Combo Lẩu. Hệ thống tự tách phiếu in ra 2 nơi.</div>
+                        <div><strong class="text-red-700">3. Thanh toán:</strong> Quét mã VietQR, in hóa đơn.</div>
+                    </div>
+                </div>
+                <div>
+                    <h2 class="section-header"><i class="fa-solid fa-mobile-screen"></i>IV. Sử dụng App & POS</h2>
+                    <div class="bg-white rounded-lg shadow-sm p-4 space-y-4 text-sm">
+                         <ul class="list-disc pl-4 space-y-2 text-gray-600">
+                            <li><strong>App Chủ:</strong> Xem báo cáo chi tiết: Hôm nay bán được bao nhiêu Set Lẩu, bao nhiêu Bia. Theo dõi hiệu suất nhân viên.</li>
+                            <li><strong>App Nhân viên:</strong> Order tại bàn và gửi lệnh in tách bếp/bar tự động. Kiểm tra trạng thái món (Bếp đã làm xong chưa) để báo khách.</li>
+                            <li><strong>POS:</strong> Quản lý sơ đồ bàn rộng lớn một cách trực quan. Thao tác các nghiệp vụ khó (Tách hóa đơn, Gộp bàn) nhanh chóng bằng cảm ứng.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TOPIC 6: BUFFET -->
+        <div id="topic6" class="content-section max-w-5xl mx-auto">
+             <div class="bg-white rounded-xl shadow-sm p-6 mb-6 border-t-4 border-yellow-500">
+                <div class="flex items-center justify-between mb-4">
+                    <h1 class="text-2xl md:text-3xl font-bold text-gray-800"><i class="fa-solid fa-infinity mr-3 text-yellow-600"></i>Mô Hình Nhà Hàng Buffet</h1>
+                    <span class="bg-yellow-100 text-yellow-800 text-xs font-bold px-3 py-1 rounded-full uppercase">King BBQ & Hotpot</span>
+                </div>
+            </div>
+            <img src="https://thietbibuffet.vn/wp-content/uploads/2021/02/kinh-doanh-nha-hang-buffet-1387x800.jpg" alt="Buffet" class="hero-image">
+
+             <h2 class="section-header"><i class="fa-solid fa-layer-group"></i>I. Tổng Quan & Phân Tích</h2>
+             <div class="bg-white rounded-lg shadow-sm p-6 mb-6 text-content">
+                <h3 class="font-bold text-lg mb-3">1. Phân tích Tổng quan Ngành</h3>
+                <p>Mô hình Buffet cạnh tranh bằng sự đa dạng món ăn và tốc độ "refill" (lên món). Khách hàng trả một khoản tiền cố định (Vé) để ăn không giới hạn, do đó tâm lý của họ là muốn gọi thật nhiều món và món phải lên thật nhanh.</p>
+                <p>Bài toán khó nhất của chủ nhà hàng Buffet nằm ở hai điểm: <strong>Kiểm soát giá vốn (Food Cost)</strong> khi khách ăn không giới hạn và <strong>Quy trình gọi món nhiều lượt</strong> (làm sao để bếp biết bàn nào gọi mới, món nào đã ra đủ, món nào đang chờ mà không bị rối loạn?).</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 mb-8">
+                 <div class="bg-white rounded-lg shadow-sm p-6">
+                    <h3 class="font-bold text-lg mb-4 border-b pb-2">Chân dung mô hình mẫu</h3>
+                    <div class="grid grid-cols-2 gap-4 text-sm">
+                        <div><span class="text-gray-500">Quy mô:</span> <span class="font-medium">250m2, 40 Bàn</span></div>
+                        <div><span class="text-gray-500">Menu:</span> <span class="font-medium">Vé Buffet, Gọi món không giới hạn</span></div>
+                        <div class="col-span-2"><span class="text-gray-500">Vấn đề:</span> <span class="font-medium">Gọi nhiều lượt bị rối, không kiểm soát được vốn.</span></div>
+                    </div>
+                </div>
+                <div class="roi-card rounded-lg shadow-sm overflow-hidden flex flex-col">
+                    <div class="roi-header p-4">
+                        <h3 class="font-bold text-lg"><i class="fa-solid fa-calculator mr-2"></i>Bài Toán Đầu Tư</h3>
+                        <p class="text-xs opacity-90">Gói Chuyên Nghiệp (2 Năm)</p>
+                    </div>
+                    <div class="p-4 text-sm flex-1 flex flex-col justify-between">
+                        <div class="mb-4">
+                            <div class="flex justify-between mb-1 border-b border-gray-100 pb-1">
+                                <span class="text-gray-600">Phần mềm (2 năm):</span>
+                                <span class="font-medium">~7.440.000đ</span>
+                            </div>
+                            <div class="flex justify-between mb-1 border-b border-gray-100 pb-1">
+                                <span class="text-gray-600">Phần cứng (POS, 3 In):</span>
+                                <span class="font-medium">~12.110.000đ</span>
+                            </div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-600">Hạ tầng mạng:</span>
+                                <span class="font-medium">~4.000.000đ</span>
+                            </div>
+                            <div class="flex justify-between mt-2 pt-2 border-t border-gray-300">
+                                <span class="font-bold text-gray-800">TỔNG VỐN:</span>
+                                <span class="font-bold text-red-600">~23.550.000đ</span>
+                            </div>
+                        </div>
+                        <div class="bg-green-50 p-3 rounded mb-3">
+                            <h4 class="font-bold text-green-800 text-xs mb-2 uppercase">Hiệu quả kinh tế (Tháng)</h4>
+                            <div class="flex justify-between text-xs mb-1">
+                                <span>Kiểm soát Food Cost:</span> <span>+5.000.000đ</span>
+                            </div>
+                            <div class="flex justify-between text-xs mb-1">
+                                <span>Tăng vòng quay bàn:</span> <span>+5.000.000đ</span>
+                            </div>
+                            <div class="flex justify-between font-bold text-green-700 mt-1 pt-1 border-t border-green-200">
+                                <span>Tổng lợi ích:</span> <span>+10.000.000đ</span>
+                            </div>
+                        </div>
+                        <div class="bg-blue-100 text-blue-800 rounded px-3 py-2 text-center font-bold text-sm">
+                            Hoàn vốn sau ~2.4 tháng
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+             <h2 class="section-header"><i class="fa-solid fa-microchip"></i>II. Phân tích & Đề xuất Thiết bị Hạ tầng</h2>
+             <div class="bg-white rounded-lg shadow-sm p-6 mb-6 text-content">
+                <h4 class="font-bold text-lg text-blue-800 mb-2">1. Tư vấn Mô hình Vận hành</h4>
+                <p><strong>Mô hình: Order Mobile + Máy in LAN chuyên dụng.</strong></p>
+                <p>Lý do: Lượng lệnh in tại nhà hàng Buffet là cực lớn (do khách gọi thêm liên tục). Cần hệ thống in ấn qua mạng LAN ổn định để không bị mất phiếu order.</p>
+
+                <h4 class="font-bold text-lg text-blue-800 mb-2 mt-6">2. Đề xuất Thiết bị Phần cứng</h4>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li><strong>Tại Quầy Thu ngân:</strong> Máy POS D68 Dual (Màn hình lớn 15.6 inch quản lý sơ đồ 40 bàn). Máy in hóa đơn KV804.</li>
+                    <li><strong>Tại Khu vực Bếp/Bar:</strong> Máy in Chế biến KV838 (Cổng LAN). Cần trang bị ít nhất 2-3 máy đặt tại các quầy khác nhau (Quầy cắt thịt, Bếp nóng, Bar). Dòng máy này có loa báo lớn và đèn nháy, phù hợp môi trường bếp ồn ào.</li>
+                    <li><strong>Thiết bị Order:</strong> Tận dụng điện thoại nhân viên để tăng tốc độ phục vụ (Refill) tại bàn.</li>
+                </ul>
+
+                <h4 class="font-bold text-lg text-blue-800 mb-2 mt-6">3. Tư vấn Hạ tầng mạng (Yếu tố Kỹ thuật)</h4>
+                <p>Nhà hàng Buffet 40 bàn có thể có 100-150 khách truy cập cùng lúc, cộng với tần suất in phiếu liên tục. Hệ thống mạng dân dụng chắc chắn sẽ bị quá tải (treo).</p>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li><strong>Router chịu tải (Gateway):</strong> Gợi ý Model <strong>DrayTek Vigor2927</strong> hoặc <strong>MikroTik RB750Gr3/RB4011</strong>. Vai trò: Chịu tải cho 150-200 kết nối đồng thời. Quản lý băng thông (QoS) để ưu tiên dữ liệu bán hàng.</li>
+                    <li><strong>Access Point chuyên dụng (AP):</strong> Gợi ý Model <strong>TP-Link Omada EAP245</strong> hoặc <strong>Unifi AC Pro</strong>. Cần 03-04 thiết bị lắp trần để chia tải người dùng.</li>
+                    <li><strong>Switch Gigabit:</strong> Kết nối các máy in LAN và POS về Router trung tâm.</li>
+                </ul>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <div>
+                    <h2 class="section-header"><i class="fa-solid fa-toggle-on"></i>III. Thao Tác Cơ Bản</h2>
+                    <div class="bg-white rounded-lg shadow-sm p-4 space-y-4 text-sm">
+                        <div><strong class="text-yellow-700">1. Tạo Vé & Menu:</strong> Tạo món "Vé Buffet". Tạo món Thịt/Tôm giá 0đ.</div>
+                        <div><strong class="text-yellow-700">2. Check-in & Gọi lượt 1:</strong> Chọn số lượng vé. Gọi món lần đầu.</div>
+                        <div><strong class="text-yellow-700">3. Thanh toán:</strong> Xuất hóa đơn GTGT (nếu cần).</div>
+                    </div>
+                </div>
+                <div>
+                    <h2 class="section-header"><i class="fa-solid fa-mobile-screen"></i>IV. Sử dụng App & POS</h2>
+                    <div class="bg-white rounded-lg shadow-sm p-4 space-y-4 text-sm">
+                         <ul class="list-disc pl-4 space-y-2 text-gray-600">
+                            <li><strong>App Chủ:</strong> Xem báo cáo Cost Food (Giá vốn hàng bán) ngay trên điện thoại. Theo dõi lượng khách và doanh thu theo giờ để điều phối nhân sự.</li>
+                            <li><strong>App Nhân viên:</strong> Mobile Order là công cụ đắc lực nhất. Đứng tại bàn bấm gọi thêm thịt, phiếu in thẳng xuống bếp. Tốc độ phục vụ tăng gấp đôi so với ghi giấy.</li>
+                            <li><strong>POS:</strong> Quản lý sơ đồ bàn rộng lớn (40 bàn) trực quan. Màn hình phụ hiển thị Menu và Mã QR giúp tăng vẻ chuyên nghiệp cho nhà hàng. Hỗ trợ tách hóa đơn VAT.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TOPIC 7: FINE DINING -->
+        <div id="topic7" class="content-section max-w-5xl mx-auto">
+            <div class="bg-white rounded-xl shadow-sm p-6 mb-6 border-t-4 border-gray-800">
+                <div class="flex items-center justify-between mb-4">
+                    <h1 class="text-2xl md:text-3xl font-bold text-gray-800"><i class="fa-solid fa-wine-glass mr-3"></i>Mô Hình Fine Dining</h1>
+                     <span class="bg-gray-200 text-gray-800 text-xs font-bold px-3 py-1 rounded-full uppercase">The Pearl Fine Dining</span>
+                </div>
+            </div>
+            <img src="https://lasinfoniavietnam.com/wp-content/uploads/2025/04/Fine-dining-1.jpg" alt="Fine Dining" class="hero-image">
+
+            <h2 class="section-header"><i class="fa-solid fa-layer-group"></i>I. Tổng Quan & Phân Tích</h2>
+             <div class="bg-white rounded-lg shadow-sm p-6 mb-6 text-content">
+                <h3 class="font-bold text-lg mb-3">1. Phân tích Tổng quan Ngành</h3>
+                <p>Tại các nhà hàng cao cấp (Fine Dining), khách hàng không chỉ trả tiền cho món ăn ngon mà họ trả tiền cho <strong>sự hoàn hảo của trải nghiệm</strong>. Mọi thứ từ không gian, ánh sáng, âm nhạc đến quy trình phục vụ đều phải đạt chuẩn mực cao nhất.</p>
+                <p>Đặc thù của mô hình này là thứ tự lên món (Course) phải cực kỳ chuẩn xác (Khai vị -> Món chính -> Tráng miệng), không được phép lên món khi khách chưa dùng xong món trước. Bên cạnh đó, sự thấu hiểu và cá nhân hóa (ghi nhớ sở thích, dị ứng của khách VIP) là yếu tố then chốt để giữ chân tầng lớp thượng lưu.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 mb-8">
+                 <div class="bg-white rounded-lg shadow-sm p-6">
+                    <h3 class="font-bold text-lg mb-4 border-b pb-2">Chân dung mô hình mẫu</h3>
+                    <div class="grid grid-cols-2 gap-4 text-sm">
+                        <div><span class="text-gray-500">Quy mô:</span> <span class="font-medium">150m2, 10 Bàn + 1 VIP</span></div>
+                        <div><span class="text-gray-500">Menu:</span> <span class="font-medium">Bò Wagyu, Rượu Vang</span></div>
+                        <div class="col-span-2"><span class="text-gray-500">Vấn đề:</span> <span class="font-medium">Sai nhịp lên món, quên sở thích VIP.</span></div>
+                    </div>
+                </div>
+                <div class="roi-card rounded-lg shadow-sm overflow-hidden flex flex-col">
+                    <div class="roi-header p-4">
+                        <h3 class="font-bold text-lg"><i class="fa-solid fa-calculator mr-2"></i>Bài Toán Đầu Tư</h3>
+                        <p class="text-xs opacity-90">Gói Chuyên Nghiệp / Cao Cấp</p>
+                    </div>
+                    <div class="p-4 text-sm flex-1 flex flex-col justify-between">
+                        <div class="mb-4">
+                            <div class="flex justify-between mb-1 border-b border-gray-100 pb-1">
+                                <span class="text-gray-600">Phần mềm:</span>
+                                <span class="font-medium">~7.440.000đ</span>
+                            </div>
+                            <div class="flex justify-between mb-1 border-b border-gray-100 pb-1">
+                                <span class="text-gray-600">Phần cứng (Cao cấp):</span>
+                                <span class="font-medium">~15-20.000.000đ</span>
+                            </div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-600">Hạ tầng mạng:</span>
+                                <span class="font-medium">~5.000.000đ</span>
+                            </div>
+                            <div class="flex justify-between mt-2 pt-2 border-t border-gray-300">
+                                <span class="font-bold text-gray-800">TỔNG VỐN:</span>
+                                <span class="font-bold text-red-600">~30.000.000đ</span>
+                            </div>
+                        </div>
+                        <div class="bg-green-50 p-3 rounded mb-3">
+                            <h4 class="font-bold text-green-800 text-xs mb-2 uppercase">Lợi ích Bảo vệ Thương hiệu</h4>
+                            <div class="text-xs mb-1 text-gray-600">
+                                Ngăn chặn thất thoát hàng giá trị cao (Rượu vang, Wagyu).
+                            </div>
+                            <div class="flex justify-between font-bold text-green-700 mt-1 pt-1 border-t border-green-200">
+                                <span>Giá trị tiết kiệm:</span> <span>~5-10.000.000đ/tháng</span>
+                            </div>
+                        </div>
+                        <div class="bg-blue-100 text-blue-800 rounded px-3 py-2 text-center font-bold text-sm">
+                            Đầu tư xứng tầm đẳng cấp
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+             <h2 class="section-header"><i class="fa-solid fa-microchip"></i>II. Phân tích & Đề xuất Thiết bị Hạ tầng</h2>
+             <div class="bg-white rounded-lg shadow-sm p-6 mb-6 text-content">
+                <h4 class="font-bold text-lg text-blue-800 mb-2">1. Tư vấn Mô hình Vận hành</h4>
+                <p><strong>Mô hình: Tablet Order + In LAN Đa điểm.</strong></p>
+                <p>Lý do: Để tăng sự chuyên nghiệp, nhân viên nên sử dụng Máy tính bảng (Tablet) thay vì điện thoại cá nhân. Hệ thống in ấn cần tách biệt giữa Bếp Nóng, Bếp Lạnh và Bar để quy trình chế biến không bị chồng chéo.</p>
+
+                <h4 class="font-bold text-lg text-blue-800 mb-2 mt-6">2. Đề xuất Thiết bị Phần cứng</h4>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li><strong>Tại Quầy Thu ngân (Reception):</strong> Máy POS D68 Dual (Bắt buộc) thiết kế sang trọng với 2 màn hình cảm ứng.</li>
+                    <li><strong>Tại Khu vực Chế biến:</strong> Máy in Chế biến KV838 (LAN). Cần nhiều máy in đặt tại các station khác nhau. Lưu ý kỹ thuật: Có thể tắt chuông báo lớn của máy in, chỉ để đèn nháy tín hiệu để giữ không gian bếp yên tĩnh, chuyên nghiệp.</li>
+                    <li><strong>Thiết bị Order:</strong> Sử dụng Máy tính bảng (iPad/Android Tablet).</li>
+                </ul>
+
+                <h4 class="font-bold text-lg text-blue-800 mb-2 mt-6">3. Tư vấn Hạ tầng mạng (Yếu tố Kỹ thuật)</h4>
+                <p>Mô hình Fine Dining đòi hỏi sự ổn định tuyệt đối. Việc nhân viên cầm Tablet di chuyển order tại bàn hoặc trong phòng VIP phải mượt mà, không được phép mất kết nối.</p>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li><strong>Router chịu tải (Gateway):</strong> Gợi ý Model <strong>DrayTek Vigor2927</strong> hoặc <strong>MikroTik RB4011</strong>. Vai trò: Đảm bảo sự ổn định của hệ thống IP, xử lý ưu tiên luồng dữ liệu bán hàng.</li>
+                    <li><strong>Access Point chuyên dụng (AP):</strong> Gợi ý Model <strong>Unifi AC Pro/NanoHD</strong> hoặc <strong>Aruba Instant On AP12/15</strong>. Tính năng bắt buộc: Hỗ trợ <strong>Roaming</strong> tốt để khi nhân viên cầm Tablet đi từ sảnh vào phòng VIP, sóng Wifi tự động chuyển vùng mà không bị ngắt quãng.</li>
+                </ul>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <div>
+                    <h2 class="section-header"><i class="fa-solid fa-toggle-on"></i>III. Thao Tác Cơ Bản</h2>
+                    <div class="bg-white rounded-lg shadow-sm p-4 space-y-4 text-sm">
+                        <div><strong class="text-gray-800">1. Khởi tạo Sơ đồ & Menu:</strong> Tạo khu vực VIP riêng biệt. Menu giá trị cao (Bò Wagyu).</div>
+                        <div><strong class="text-gray-800">2. Order & Ghi chú VIP:</strong> Order món kèm ghi chú: "Dị ứng hạt", "Khách quen".</div>
+                        <div><strong class="text-gray-800">3. Xuất Hóa đơn GTGT:</strong> Xuất hóa đơn đỏ nhanh chóng, chuyên nghiệp.</div>
+                    </div>
+                </div>
+                <div>
+                    <h2 class="section-header"><i class="fa-solid fa-mobile-screen"></i>IV. Sử dụng App & POS</h2>
+                    <div class="bg-white rounded-lg shadow-sm p-4 space-y-4 text-sm">
+                         <ul class="list-disc pl-4 space-y-2 text-gray-600">
+                            <li><strong>App Chủ:</strong> Theo dõi doanh thu bàn VIP, xem lịch sử gọi món của khách quen để chăm sóc tốt hơn. Duyệt các phiếu nhập hàng, hủy hàng giá trị cao từ xa.</li>
+                            <li><strong>Tablet Nhân viên:</strong> Sử dụng trên Tablet (iPad/Android) mang lại hình ảnh chuyên nghiệp khi đứng order tại bàn khách. Thao tác thêm ghi chú, tách món, chuyển món mượt mà.</li>
+                            <li><strong>POS:</strong> Giao diện màn hình rộng giúp quản lý bao quát. Màn hình phụ hiển thị hình ảnh món ăn và thông tin thanh toán minh bạch.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </main>
-    
-    <footer class="bg-slate-800 text-white mt-20">
-        <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center text-slate-400 text-sm">
-            <p>© 2024 KiotViet. All rights reserved.</p>
-        </div>
-    </footer>
 
-    <!-- Scripts -->
+    <!-- JS FOR NAVIGATION -->
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // --- DATA ---
-            const tabsData = [
-                { id: 'cafe',        icon: 'fa-mug-hot',        title: 'Cà phê & Trà sữa' },
-                { id: 'finedining',  icon: 'fa-wine-glass-alt', title: 'Nhà hàng Cao cấp' },
-                { id: 'midrange',    icon: 'fa-utensils',       title: 'Nhà hàng Trung cấp' },
-                { id: 'buffet',      icon: 'fa-concierge-bell', title: 'Buffet (Lẩu/Nướng)' },
-                { id: 'fastfood',    icon: 'fa-hamburger',      title: 'Fast Food' },
-                { id: 'local',       icon: 'fa-store',          title: 'Quán Bình dân' },
-                { id: 'canteen',     icon: 'fa-building',       title: 'Canteen / Food Court' }
-            ];
-
-            // --- ELEMENTS ---
-            const mainTabsContainer = document.getElementById('main-tabs');
-            const tabContentPanels = document.querySelectorAll('.tab-content-panel');
-            const scrollWrapper = document.getElementById('tabs-scroll-wrapper');
-            const scrollLeftBtn = document.getElementById('scroll-tabs-left');
-            const scrollRightBtn = document.getElementById('scroll-tabs-right');
+        function showSection(id) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(el => el.classList.remove('active'));
             
-            // --- FULL HTML CONTENT ---
-            const allContentData = {
-                'content-finedining': `
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                    <aside class="lg:col-span-3">
-                        <nav id="sidebar-nav-finedining" class="sidebar-nav sticky top-24">
-                            <div class="flex flex-col bg-white/60 backdrop-blur-lg rounded-xl p-4 border border-slate-200 space-y-1">
-                                <a href="#finedining-1" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">1. Giới thiệu chung</a>
-                                <a href="#finedining-2" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">2. Menu Giả định</a>
-                                <a href="#finedining-3" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">3. Chân dung & Nỗi đau</a>
-                                <a href="#finedining-4" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">4. Lựa chọn: Trạm Thu ngân</a>
-                                <a href="#finedining-5" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">5. Lựa chọn: Thiết bị Order</a>
-                                <a href="#finedining-6" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">6. Gói Phần cứng</a>
-                                <a href="#finedining-7" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">7. Setup Thiết bị Mạng</a>
-                                <a href="#finedining-8" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">8. Quy trình Thiết lập</a>
-                                <a href="#finedining-9" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">9. Tính toán ROI</a>
-                                <a href="#finedining-10" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">10. Tư vấn Nâng cao</a>
-                            </div>
-                        </nav>
-                    </aside>
-                    <div class="lg:col-span-9">
-                        <div class="bg-white/60 backdrop-blur-lg rounded-2xl p-6 md:p-8 border border-slate-200 shadow-sm space-y-12">
-                            <section id="finedining-1" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-info-circle mr-3 kv-blue-text"></i>1. Giới thiệu chung về Ngành Nhà hàng Cao cấp</h2><p class="mt-4">Mô hình "Nhà hàng cao cấp" (Fine Dining) đặt trọng tâm tuyệt đối vào <strong>TRẢI NGHIỆM KHÁCH HÀNG</strong>.</p><h3 class="text-lg font-semibold text-slate-700 mt-6 mb-3">Đặc điểm chính:</h3><ul class="space-y-3"><li class="flex items-start"><i class="fa-solid fa-crown w-5 mt-1 mr-3 text-slate-400"></i><span><strong>Trải nghiệm là Vua:</strong> Lỗi phục vụ là điều cấm kỵ.</span></li><li class="flex items-start"><i class="fa-solid fa-calendar-alt w-5 mt-1 mr-3 text-slate-400"></i><span><strong>Quản lý Đặt bàn (Booking):</strong> Cực kỳ quan trọng, cần quản lý thông tin khách VIP.</span></li><li class="flex items-start"><i class="fa-solid fa-fire-alt w-5 mt-1 mr-3 text-slate-400"></i><span><strong>Quy trình Bếp Phức tạp:</strong> Bếp chia nhiều khu, món ăn nhiều yêu cầu chi tiết (độ chín, dị ứng...).</span></li><li class="flex items-start"><i class="fa-solid fa-user-tie w-5 mt-1 mr-3 text-slate-400"></i><span><strong>Vai trò của Captain:</strong> Phải có kỹ năng tư vấn và chăm sóc khách hàng VIP.</span></li><li class="flex items-start"><i class="fa-solid fa-credit-card w-5 mt-1 mr-3 text-slate-400"></i><span><strong>Thanh toán tại bàn:</strong> Đa số khách hàng yêu cầu mang bill và máy POS cầm tay đến bàn.</span></li></ul></section>
-                            <section id="finedining-2" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-book-open mr-3 kv-blue-text"></i>2. Menu Giả định ("La Maison")</h2><div class="mt-4 overflow-x-auto"><table class="custom-table"><thead><tr><th>Nhóm hàng</th><th>Tên hàng hóa</th><th>Tùy chọn (Ghi chú bắt buộc)</th></tr></thead><tbody><tr><td><strong>Món chính (Bò)</strong></td><td>Thăn nội Bò Úc (Tenderloin)</td><td>- <strong>Mức độ chín:</strong> (Rare, Medium Rare, Medium...)</td></tr><tr><td><strong>Món chính (Hải sản)</strong></td><td>Cá Tuyết Áp chảo</td><td>- <strong>Yêu cầu đặc biệt:</strong> (Ví dụ: Dị ứng đậu phộng...)</td></tr></tbody></table></div></section>
-                            <section id="finedining-3" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-user-tie mr-3 kv-blue-text"></i>3. Chân dung & Nỗi đau</h2><div class="mt-4 bg-slate-50 rounded-lg p-4 border"><p><strong>Khách hàng:</strong> Anh Minh, chủ nhà hàng "La Maison".</p><p><strong>Mô hình:</strong> 60 bàn, 3 phòng VIP.</p></div><div class="mt-6 bg-red-50 border-l-4 border-red-500 text-red-800 p-4 rounded-r-lg" role="alert"><h4 class="font-bold flex items-center"><i class="fa-solid fa-heart-crack mr-2"></i>Nỗi đau cốt lõi</h4><ol class="list-decimal list-inside mt-2 space-y-1"><li><strong>Sai sót Order (lớn nhất):</strong> Captain ghi tay sai yêu cầu "Medium Rare", "dị ứng" -> sai lầm "chết người".</li><li><strong>Rối loạn Đặt bàn:</strong> Ghi sổ tay/Excel gây trùng lặp, "thảm họa" khi khách đến.</li><li><strong>Hỗn loạn Bếp:</strong> Không biết ưu tiên Bàn VIP, không phân luồng được Bếp Nóng/Lạnh.</li><li><strong>Thanh toán chậm:</strong> Nhân viên chạy đi chạy lại nhiều lần, thiếu chuyên nghiệp.</li><li><strong>Không chăm sóc được khách VIP:</strong> Không biết sở thích, lịch sử chi tiêu của khách quen.</li></ol></div></section>
-                            <section id="finedining-4" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-cash-register mr-3 kv-blue-text"></i>4. Lựa chọn (1): "Trạm Thu ngân" & "Lễ tân"</h2><p class="mt-4 italic text-slate-600">Với nhà hàng cao cấp, chúng ta cần tối ưu cả Trạm Lễ tân (Reception) để quản lý đặt bàn và Trạm Thu ngân (Cashier).</p><div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6"><div class="border rounded-lg p-4 bg-white"><h4 class="font-bold flex items-center"><i class="fa-solid fa-desktop mr-2 text-slate-500"></i>A: Dùng Bộ PC (Cho cả 2 Trạm)</h4><p class="text-sm text-slate-500 mt-2"><strong>Ưu điểm:</strong> <span class="text-green-600">Tiết kiệm chi phí,</span> phù hợp cho lễ tân nhập liệu.</p><p class="text-sm text-slate-500"><strong>Nhược điểm:</strong> <span class="text-red-600">Thao tác tại quầy thu ngân chậm.</span></p></div><div class="border-2 kv-blue-border rounded-lg p-4 bg-blue-50 relative"><span class="absolute top-0 right-0 -mt-3 -mr-3 kv-blue-bg text-white text-xs font-bold px-3 py-1 rounded-full">Khuyến nghị</span><h4 class="font-bold flex items-center"><i class="fa-solid fa-tablet-screen-button mr-2 kv-blue-text"></i>B: Máy POS (Thu ngân) + PC (Lễ tân)</h4><p class="text-sm text-slate-600 mt-2"><strong>Ưu điểm:</strong> <span class="text-green-600">Chuyên nghiệp,</span> cả hai khu vực đều nhanh và tối ưu nhất.</p><p class="text-sm text-slate-600"><strong>Nhược điểm:</strong> <span class="text-red-600">Chi phí đầu tư cao hơn.</span></p></div></div></section>
-                            <section id="finedining-5" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-mobile-alt mr-3 kv-blue-text"></i>5. Lựa chọn (2): Thiết bị Order (Cho Captain)</h2><div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6"><div class="border-2 kv-blue-border rounded-lg p-4 bg-blue-50 relative"><span class="absolute top-0 right-0 -mt-3 -mr-3 kv-blue-bg text-white text-xs font-bold px-3 py-1 rounded-full">Khuyến nghị</span><h4 class="font-bold flex items-center"><i class="fa-solid fa-tablet-alt mr-2 kv-blue-text"></i>A: Đầu tư Tablet chuyên dụng</h4><p class="text-sm text-slate-600 mt-2"><strong>Ưu điểm:</strong> <span class="text-green-600">Cực kỳ chuyên nghiệp,</span> xứng tầm nhà hàng, chọn ghi chú chính xác tuyệt đối.</p><p class="text-sm text-slate-600"><strong>Nhược điểm:</strong> <span class="text-red-600">Chi phí đầu tư cao.</span></p></div><div class="border-2 border-red-500 rounded-lg p-4 bg-red-50 relative"><span class="absolute top-0 right-0 -mt-3 -mr-3 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full">Không khuyến nghị</span><h4 class="font-bold flex items-center"><i class="fa-solid fa-mobile-screen mr-2 text-red-600"></i>B: Dùng Điện thoại nhân viên</h4><p class="text-sm text-red-600 mt-2"><strong>Nhược điểm:</strong> <span class="text-red-600">Thiếu chuyên nghiệp,</span> gây hình ảnh rất tệ cho nhà hàng cao cấp.</p></div></div></section>
-                            <section id="finedining-6" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-box-open mr-3 kv-blue-text"></i>6. Gói Phần cứng Hoàn chỉnh</h2><div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6"><div class="border rounded-lg p-4 bg-white"><h4 class="font-bold flex items-center"><i class="fa-solid fa-laptop-code mr-2 text-slate-500"></i>Combo 1: Gói TIÊU CHUẨN</h4><ul class="text-sm mt-2 list-disc list-inside space-y-1"><li><strong>Lễ tân & Thu ngân:</strong> Dùng Bộ PC.</li><li><strong>Order di động:</strong> 5 Tablet.</li><li><strong>Bếp:</strong> 03 Máy in Bếp (Nóng, Lạnh, Bar).</li><li><strong>Thanh toán tại bàn:</strong> Máy POS cầm tay.</li></ul></div><div class="border-2 kv-blue-border rounded-lg p-4 bg-blue-50 relative"><span class="absolute top-0 right-0 -mt-3 -mr-3 kv-blue-bg text-white text-xs font-bold px-3 py-1 rounded-full">Khuyến nghị</span><h4 class="font-bold flex items-center"><i class="fa-solid fa-gem mr-2 kv-blue-text"></i>Combo 2: Gói CAO CẤP</h4><ul class="text-sm mt-2 list-disc list-inside space-y-1"><li><strong>Lễ tân:</strong> Dùng Bộ PC.</li><li><strong>Thu ngân:</strong> Máy POS chuyên dụng.</li><li><strong>Order di động:</strong> 5 Tablet.</li><li><strong>Bếp:</strong> 03 Máy in Bếp.</li><li><strong>Thanh toán tại bàn:</strong> Máy POS cầm tay.</li></ul></div></div></section>
-                            <section id="finedining-7" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-network-wired mr-3 kv-blue-text"></i>7. Setup Thiết bị Mạng</h2><div class="mt-4 overflow-x-auto"><table class="custom-table"><thead><tr><th>Phương án</th><th>Ưu điểm</th><th>Nhược điểm</th></tr></thead><tbody><tr class="bg-red-50 text-red-700"><td><strong>TỐI THIỂU</strong></td><td>Tiết kiệm.</td><td><strong>Tuyệt đối không nên dùng.</strong> Gây thảm họa dịch vụ.</td></tr><tr class="bg-blue-50 text-blue-700"><td><strong>KHUYẾN NGHỊ</strong> (Cân bằng tải + PoE + AP)</td><td><strong>Ổn định 95%.</strong> Chịu tải tốt, có mạng dự phòng.</td><td>Chi phí cao hơn.</td></tr><tr class="bg-green-50 text-green-700"><td><strong>CAO CẤP (Đề xuất)</strong> (Hệ thống Roaming)</td><td><strong>Ổn định 99.9%.</strong> Captain di chuyển không ngắt kết nối.</td><td>Chi phí cao.</td></tr></tbody></table></div><blockquote class="mt-6 border-l-4 kv-blue-border bg-slate-100 p-4 italic text-slate-700 rounded-r-lg"><strong>Tư vấn Kỹ thuật:</strong> Toàn bộ <strong>Trạm PC/POS</strong> và <strong>03 Máy in Bếp</strong> phải được <code>cắm dây mạng (LAN)</code>.</blockquote></section>
-                            <section id="finedining-8" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-cogs mr-3 kv-blue-text"></i>8. Quy trình Thiết lập & Chuyển giao</h2><div class="mt-6 space-y-4"><p><i class="fas fa-database mr-2 kv-blue-text"></i><strong>Thiết lập Tùy chọn Bắt buộc:</strong> Khi chọn "Tenderloin", KiotViet <em>bắt buộc</em> Captain phải chọn "Mức độ chín".</p><p><i class="fas fa-print mr-2 kv-blue-text"></i><strong>Thiết lập In tách bếp:</strong> "Salad" -> in Bếp Lạnh. "Steak" -> in Bếp Nóng. "Rượu Vang" -> in Bar.</p><p><i class="fas fa-user-edit mr-2 text-green-500"></i><strong>Đào tạo Captain:</strong> Xử lý Ghi chú chính xác (Giải quyết Nỗi đau 1). Ghi chú được in chính xác 100% tại bếp.</p><p><i class="fas fa-chart-pie mr-2 text-green-500"></i><strong>Đào tạo Quản lý:</strong> Xem lịch sử khách hàng (CRM) để chăm sóc VIP (Giải quyết Nỗi đau 5).</p></div></section>
-                            <section id="finedining-9" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-chart-line mr-3 kv-blue-text"></i>9. Tính toán Lợi tức Đầu tư (ROI)</h2><div class="mt-6 bg-green-50 border-l-4 border-green-500 text-green-800 p-4 rounded-r-lg" role="alert"><h4 class="font-bold flex items-center"><i class="fa-solid fa-shield-alt mr-2"></i>Bảo vệ Doanh thu & Danh tiếng</h4><ul class="list-disc list-inside mt-2 space-y-1"><li><strong>Giảm Chi phí Sai hỏng:</strong> Tỷ lệ sai sót order giảm về 0, bảo vệ doanh thu và danh tiếng tuyệt đối.</li><li><strong>Tăng Hiệu suất Phục vụ:</strong> Captain có nhiều thời gian hơn để <em>thực sự phục vụ</em> khách, nâng tầm trải nghiệm.</li><li><strong>Tăng Doanh thu từ Khách VIP:</strong> CRM giúp tư vấn đúng sở thích, tăng lòng trung thành và chi tiêu của khách VIP lên <strong>20-30%</strong>.</li></ul></div></section>
-                            <section id="finedining-10" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-rocket mr-3 kv-blue-text"></i>10. Tư vấn Vận hành Nâng cao</h2><ul class="mt-4 list-disc list-inside space-y-2"><li><strong>Tích hợp Hệ thống Đặt bàn Online:</strong> Khách tự đặt bàn, thông tin tự động đồng bộ vào KiotViet.</li><li><strong>Quản lý Khách hàng Chuyên sâu (CRM):</strong> Phân hạng khách, tạo chương trình tích điểm, thẻ thành viên.</li><li><strong>Quản lý Định lượng Nguyên vật liệu:</strong> Kiểm soát chi phí vốn (food cost) chính xác, chống thất thoát.</li></ul></section>
-                        </div>
-                    </div>
-                 </div>
-                `,
-                'content-midrange': `
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                    <aside class="lg:col-span-3">
-                        <nav id="sidebar-nav-midrange" class="sidebar-nav sticky top-24">
-                            <div class="flex flex-col bg-white/60 backdrop-blur-lg rounded-xl p-4 border border-slate-200 space-y-1">
-                                <a href="#midrange-1" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">1. Giới thiệu chung</a>
-                                <a href="#midrange-2" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">2. Menu Giả định</a>
-                                <a href="#midrange-3" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">3. Chân dung & Nỗi đau</a>
-                                <a href="#midrange-4" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">4. Lựa chọn: Trạm Thu ngân</a>
-                                <a href="#midrange-5" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">5. Lựa chọn: Thiết bị Order</a>
-                                <a href="#midrange-6" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">6. Gói Phần cứng</a>
-                                <a href="#midrange-7" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">7. Setup Thiết bị Mạng</a>
-                                <a href="#midrange-8" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">8. Quy trình Thiết lập</a>
-                                <a href="#midrange-9" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">9. Tính toán ROI</a>
-                                <a href="#midrange-10" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">10. Tư vấn Nâng cao</a>
-                            </div>
-                        </nav>
-                    </aside>
-                    <div class="lg:col-span-9">
-                        <div class="bg-white/60 backdrop-blur-lg rounded-2xl p-6 md:p-8 border border-slate-200 shadow-sm space-y-12">
-                            <section id="midrange-1" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-info-circle mr-3 kv-blue-text"></i>1. Giới thiệu chung về Ngành Nhà hàng Trung cấp</h2><p class="mt-4">Ngành hàng Nhà hàng Trung cấp (phân khúc 100k-250k/người) là mô hình F&B có tính cạnh tranh cao, tập trung vào trải nghiệm "no nê, vui vẻ" và hiệu suất vận hành.</p><h3 class="text-lg font-semibold text-slate-700 mt-6 mb-3">Đặc điểm chính:</h3><ul class="space-y-3"><li class="flex items-start"><i class="fa-solid fa-receipt w-5 mt-1 mr-3 text-slate-400"></i><span><strong>Thanh toán Sau:</strong> Khách order tại bàn, dùng bữa và thanh toán tổng hóa đơn khi ra về.</span></li><li class="flex items-start"><i class="fa-solid fa-plus-circle w-5 mt-1 mr-3 text-slate-400"></i><span><strong>Order tại bàn liên tục:</strong> Tần suất order rất cao, đặc biệt với mô hình Lẩu/Nướng.</span></li><li class="flex items-start"><i class="fa-solid fa-kitchen-set w-5 mt-1 mr-3 text-slate-400"></i><span><strong>Bếp/Bar Phân mảnh:</strong> Thường có nhiều khu vực (Bếp nóng, Bếp sơ chế, Bar).</span></li><li class="flex items-start"><i class="fa-solid fa-person-running w-5 mt-1 mr-3 text-slate-400"></i><span><strong>Nút thắt cổ chai:</strong> Tốc độ nhân viên order và Bếp ra đồ quyết định sự hài lòng.</span></li><li class="flex items-start"><i class="fa-solid fa-users w-5 mt-1 mr-3 text-slate-400"></i><span><strong>Giờ cao điểm:</strong> Cực kỳ đông vào buổi tối và cuối tuần.</span></li></ul></section>
-                            <section id="midrange-2" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-book-open mr-3 kv-blue-text"></i>2. Menu Giả định ("Nướng Lửa Việt")</h2><div class="mt-4 overflow-x-auto"><table class="custom-table"><thead><tr><th>Nhóm hàng</th><th>Tên hàng hóa</th><th>Tùy chọn (Ghi chú)</th></tr></thead><tbody><tr><td><strong>Combo Nướng</strong></td><td>Combo Thịt 2-3 người</td><td>(Không có)</td></tr><tr><td><strong>Thịt Nướng (Lẻ)</strong></td><td>Ba chỉ Bò Mỹ (Sốt BBQ)</td><td>- Ghi chú: (Ví dụ: "Không cay")</td></tr><tr><td><strong>Lẩu</strong></td><td>Lẩu Thái Tomyum</td><td>- Ghi chú: (Ví dụ: "Ít cay")</td></tr><tr><td><strong>Đồ uống (Có cồn)</strong></td><td>Rượu Soju</td><td>(Không có)</td></tr></tbody></table></div></section>
-                            <section id="midrange-3" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-user-tie mr-3 kv-blue-text"></i>3. Chân dung & Nỗi đau</h2><div class="mt-4 bg-slate-50 rounded-lg p-4 border"><p><strong>Khách hàng:</strong> Anh Nam, chủ quán "Nướng Lửa Việt".</p><p><strong>Mô hình:</strong> 30 bàn, chuyên Lẩu/Nướng A-la-carte.</p></div><div class="mt-6 bg-red-50 border-l-4 border-red-500 text-red-800 p-4 rounded-r-lg" role="alert"><h4 class="font-bold flex items-center"><i class="fa-solid fa-heart-crack mr-2"></i>Nỗi đau cốt lõi</h4><ol class="list-decimal list-inside mt-2 space-y-1"><li><strong>Sai sót Order:</strong> Nhân viên ghi tay, bếp đọc nhầm/quên ghi chú "ít cay".</li><li><strong>Hỗn loạn Bếp/Bar:</strong> Không phân luồng được món cho Bếp Sơ chế, Bếp Nóng, Bar.</li><li><strong>Mất kiểm soát Hóa đơn:</strong> Quên nhập các món khách gọi thêm vào bill.</li><li><strong>Ùn tắc Thanh toán:</strong> Cộng sổ tay/giấy order thủ công rất lâu khi đông khách.</li><li><strong>Không quản lý được:</strong> Không biết món bán chạy, tồn kho, lo thất thoát.</li></ol></div></section>
-                            <section id="midrange-4" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-cash-register mr-3 kv-blue-text"></i>4. Lựa chọn (1): Trạm Thu ngân chính</h2><div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6"><div class="border rounded-lg p-4 bg-white"><h4 class="font-bold flex items-center"><i class="fa-solid fa-desktop mr-2 text-slate-500"></i>A: Dùng Bộ PC</h4><p class="text-sm text-slate-500 mt-2"><strong>Ưu điểm:</strong> <span class="text-green-600">Tiết kiệm chi phí,</span> mạnh cho quản lý báo cáo.</p><p class="text-sm text-slate-500"><strong>Nhược điểm:</strong> <span class="text-red-600">Thao tác thanh toán chậm hơn.</span></p></div><div class="border-2 kv-blue-border rounded-lg p-4 bg-blue-50 relative"><span class="absolute top-0 right-0 -mt-3 -mr-3 kv-blue-bg text-white text-xs font-bold px-3 py-1 rounded-full">Khuyến nghị</span><h4 class="font-bold flex items-center"><i class="fa-solid fa-tablet-screen-button mr-2 kv-blue-text"></i>B: Máy POS Chuyên dụng</h4><p class="text-sm text-slate-600 mt-2"><strong>Ưu điểm:</strong> <span class="text-green-600">Chuyên nghiệp, thao tác rất nhanh,</span> giảm ùn tắc.</p><p class="text-sm text-slate-600"><strong>Nhược điểm:</strong> <span class="text-red-600">Chi phí đầu tư ban đầu.</span></p></div></div></section>
-                            <section id="midrange-5" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-mobile-alt mr-3 kv-blue-text"></i>5. Lựa chọn (2): Thiết bị Order Phụ trợ</h2><div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6"><div class="border-2 kv-blue-border rounded-lg p-4 bg-blue-50 relative"><span class="absolute top-0 right-0 -mt-3 -mr-3 kv-blue-bg text-white text-xs font-bold px-3 py-1 rounded-full">Khuyến nghị</span><h4 class="font-bold flex items-center"><i class="fa-solid fa-tablet-alt mr-2 kv-blue-text"></i>A: Đầu tư Tablet chuyên dụng</h4><p class="text-sm text-slate-600 mt-2"><strong>Ưu điểm:</strong> <span class="text-green-600">Chuyên nghiệp,</span> màn hình to, chọn món và ghi chú chính xác.</p><p class="text-sm text-slate-600"><strong>Nhược điểm:</strong> <span class="text-red-600">Chi phí đầu tư.</span></p></div><div class="border rounded-lg p-4 bg-white"><h4 class="font-bold flex items-center"><i class="fa-solid fa-mobile-screen mr-2 text-slate-500"></i>B: Dùng Điện thoại nhân viên</h4><p class="text-sm text-slate-500 mt-2"><strong>Ưu điểm:</strong> <span class="text-green-600">Chi phí = 0 đồng.</span></p><p class="text-sm text-slate-500"><strong>Nhược điểm:</strong> <span class="text-red-600">Thiếu chuyên nghiệp,</span> dễ xao nhãng.</p></div></div></section>
-                            <section id="midrange-6" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-box-open mr-3 kv-blue-text"></i>6. Gói Phần cứng Hoàn chỉnh</h2><div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6"><div class="border rounded-lg p-4 bg-white"><h4 class="font-bold flex items-center"><i class="fa-solid fa-laptop-code mr-2 text-slate-500"></i>Combo 1: Gói TIẾT KIỆM</h4><ul class="text-sm mt-2 list-disc list-inside space-y-1"><li><strong>Trạm chính:</strong> Bộ PC có sẵn.</li><li><strong>Order di động:</strong> Điện thoại nhân viên.</li><li><strong>Bếp/Bar:</strong> 02 Máy in Bếp.</li><li><strong>Thu ngân:</strong> Máy in bill, Ngăn kéo, Màn hình QR.</li></ul></div><div class="border-2 kv-blue-border rounded-lg p-4 bg-blue-50 relative"><span class="absolute top-0 right-0 -mt-3 -mr-3 kv-blue-bg text-white text-xs font-bold px-3 py-1 rounded-full">Khuyến nghị</span><h4 class="font-bold flex items-center"><i class="fa-solid fa-gem mr-2 kv-blue-text"></i>Combo 2: Gói CHUYÊN NGHIỆP</h4><ul class="text-sm mt-2 list-disc list-inside space-y-1"><li><strong>Trạm chính:</strong> Máy POS Chuyên dụng.</li><li><strong>Order di động:</strong> 3-4 Tablet chuyên dụng.</li><li><strong>Bếp/Bar:</strong> 02 Máy in Bếp.</li><li><strong>Thu ngân:</strong> Ngăn kéo, Màn hình QR.</li></ul></div></div></section>
-                            <section id="midrange-7" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-network-wired mr-3 kv-blue-text"></i>7. Setup Thiết bị Mạng</h2><div class="mt-4 overflow-x-auto"><table class="custom-table"><thead><tr><th>Phương án</th><th>Ưu điểm</th><th>Nhược điểm</th></tr></thead><tbody><tr class="bg-red-50 text-red-700"><td><strong>TỐI THIỂU</strong> (Router + Repeater)</td><td>Tiết kiệm.</td><td><strong>Rủi ro cao nhất.</strong> Mạng yếu, chập chờn, không ổn định.</td></tr><tr class="bg-green-50 text-green-700"><td><strong>KHUYẾN NGHỊ</strong> (Cân bằng tải + PoE + AP)</td><td><strong>Ổn định 95%.</strong> Chịu tải tốt, có mạng dự phòng, phủ sóng đều.</td><td>Chi phí cao hơn.</td></tr><tr class="bg-blue-50 text-blue-700"><td><strong>CAO CẤP</strong> (Hệ thống Roaming)</td><td><strong>Ổn định 99.9%.</strong> Di chuyển không ngắt kết nối.</td><td>Chi phí cao.</td></tr></tbody></table></div><blockquote class="mt-6 border-l-4 kv-blue-border bg-slate-100 p-4 italic text-slate-700 rounded-r-lg"><strong>Tư vấn Kỹ thuật:</strong> Để đảm bảo tốc độ in nhanh nhất, <strong>Trạm Thu ngân chính</strong> và <strong>02 Máy in Bếp/Bar</strong> phải được <code>cắm dây mạng (LAN)</code>.</blockquote></section>
-                            <section id="midrange-8" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-cogs mr-3 kv-blue-text"></i>8. Quy trình Thiết lập & Chuyển giao</h2><div class="mt-6 space-y-4"><p><i class="fas fa-print mr-2 kv-blue-text"></i><strong>Thiết lập In tách bếp:</strong> "Thịt nướng" in ra Bếp Sơ chế, "Lẩu Thái" in ra Bếp Nóng, "Soju" in ra Bar.</p><p><i class="fas fa-tablet-alt mr-2 text-green-500"></i><strong>Đào tạo Phục vụ:</strong> Dùng Tablet để order. Mọi món gọi thêm tự động cập nhật vào hóa đơn (Giải quyết Nỗi đau 1, 3).</p><p><i class="fas fa-dollar-sign mr-2 text-green-500"></i><strong>Đào tạo Thu ngân:</strong> Thanh toán nhanh trên máy POS, không cần cộng sổ tay (Giải quyết Nỗi đau 4).</p><p><i class="fas fa-chart-pie mr-2 text-green-500"></i><strong>Đào tạo Quản lý:</strong> Dùng App xem báo cáo tồn kho, món bán chạy (Giải quyết Nỗi đau 5).</p></div></section>
-                            <section id="midrange-9" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-chart-line mr-3 kv-blue-text"></i>9. Tính toán Lợi tức Đầu tư (ROI)</h2><div class="mt-6 bg-green-50 border-l-4 border-green-500 text-green-800 p-4 rounded-r-lg" role="alert"><h4 class="font-bold flex items-center"><i class="fa-solid fa-piggy-bank mr-2"></i>Lợi ích thu về hàng tháng</h4><ul class="list-disc list-inside mt-2 space-y-1"><li><strong>Chống thất thoát món gọi thêm:</strong> Tiết kiệm <strong>~12.000.000đ/tháng</strong>.</li><li><strong>Giảm chi phí sai hỏng:</strong> Tiết kiệm <strong>~3.000.000đ/tháng</strong>.</li><li><strong>Tăng tốc độ vòng quay bàn:</strong> Tăng doanh thu <strong>~45.000.000đ/tháng</strong>.</li></ul><hr class="my-2 border-green-200"><p class="font-bold">Tổng lợi ích: ~60.000.000đ/tháng. Thu hồi vốn chỉ sau 1-2 tháng.</p></div></section>
-                            <section id="midrange-10" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-rocket mr-3 kv-blue-text"></i>10. Tư vấn Vận hành Nâng cao</h2><ul class="mt-4 list-disc list-inside space-y-2"><li><strong>Thực đơn điện tử (QR Order tại bàn):</strong> Giảm tải 80% công việc cho nhân viên phục vụ giờ cao điểm.</li><li><strong>Kết nối Ứng dụng Giao hàng:</strong> Bán combo Lẩu/Nướng mang về, đơn hàng tự động đồng bộ.</li><li><strong>Quản lý Khách hàng (CRM):</strong> Lưu thông tin khách để tích điểm, tạo voucher, giữ chân khách cũ.</li></ul></section>
-                        </div>
-                    </div>
-                </div>
-                `,
-                'content-buffet': `
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                    <aside class="lg:col-span-3">
-                        <nav id="sidebar-nav-buffet" class="sidebar-nav sticky top-24">
-                            <div class="flex flex-col bg-white/60 backdrop-blur-lg rounded-xl p-4 border border-slate-200 space-y-1">
-                                <a href="#buffet-1" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">1. Giới thiệu chung</a>
-                                <a href="#buffet-2" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">2. Menu Giả định</a>
-                                <a href="#buffet-3" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">3. Chân dung & Nỗi đau</a>
-                                <a href="#buffet-4" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">4. Lựa chọn: Trạm Lễ tân</a>
-                                <a href="#buffet-5" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">5. Lựa chọn: Thiết bị Order</a>
-                                <a href="#buffet-6" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">6. Gói Phần cứng</a>
-                                <a href="#buffet-7" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">7. Setup Thiết bị Mạng</a>
-                                <a href="#buffet-8" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">8. Quy trình Thiết lập</a>
-                                <a href="#buffet-9" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">9. Tính toán ROI</a>
-                                <a href="#buffet-10" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">10. Tư vấn Nâng cao</a>
-                            </div>
-                        </nav>
-                    </aside>
-                    <div class="lg:col-span-9">
-                        <div class="bg-white/60 backdrop-blur-lg rounded-2xl p-6 md:p-8 border border-slate-200 shadow-sm space-y-12">
-                            <section id="buffet-1" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-info-circle mr-3 kv-blue-text"></i>1. Giới thiệu chung về Ngành Nhà hàng Buffet</h2><p class="mt-4">Mô hình Buffet, đặc biệt là Lẩu/Nướng tại bàn, là mô hình kinh doanh F&B có lợi nhuận cao nhưng vận hành cực kỳ phức tạp.</p><h3 class="text-lg font-semibold text-slate-700 mt-6 mb-3">Đặc điểm chính:</h3><ul class="space-y-3"><li class="flex items-start"><i class="fa-solid fa-ticket-alt w-5 mt-1 mr-3 text-slate-400"></i><span><strong>Thanh toán Trước:</strong> Khách hàng thường thanh toán tiền "vé" (ticket) tại quầy trước khi vào bàn.</span></li><li class="flex items-start"><i class="fa-solid fa-stopwatch w-5 mt-1 mr-3 text-slate-400"></i><span><strong>Kiểm soát Thời gian:</strong> Áp dụng giới hạn thời gian (90 phút, 120 phút) là nghiệp vụ quản lý cốt lõi.</span></li><li class="flex items-start"><i class="fa-solid fa-user-friends w-5 mt-1 mr-3 text-slate-400"></i><span><strong>Sản phẩm là "Vé":</strong> Hàng hóa chính là các loại vé (Người lớn, Trẻ em, Vé trưa, Vé tối).</span></li><li class="flex items-start"><i class="fa-solid fa-cash-register w-5 mt-1 mr-3 text-slate-400"></i><span><strong>Order tại bàn (Miễn phí & Tính phí):</strong> Order món trong gói buffet (giá=0) và món ngoài gói (tính phí).</span></li><li class="flex items-start"><i class="fa-solid fa-door-open w-5 mt-1 mr-3 text-slate-400"></i><span><strong>Vai trò của Lễ tân:</strong> Cực kỳ quan trọng, là "chốt chặn" kiểm soát doanh thu.</span></li></ul></section>
-                            <section id="buffet-2" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-book-open mr-3 kv-blue-text"></i>2. Menu Giả định ("Lẩu Nướng Xèo Xèo")</h2><div class="mt-4 overflow-x-auto"><table class="custom-table"><thead><tr><th>Nhóm hàng</th><th>Tên hàng hóa</th><th>Tùy chọn</th></tr></thead><tbody><tr><td><strong>1. VÉ BUFFET</strong></td><td>Vé Buffet Trưa / Tối / Cuối tuần</td><td>- Phân biệt: (Người lớn, Trẻ em)</td></tr><tr><td><strong>2. ĐỒ UỐNG (Tính phí)</strong></td><td>Coca-Cola (Lon), Rượu Soju</td><td>(Bán thêm tại bàn)</td></tr><tr><td><strong>3. MÓN ORDER TẠI BÀN</strong></td><td>Ba chỉ Bò Mỹ (Nướng), Nấm kim châm</td><td>- Ghi chú: (Ví dụ: "Cay nhiều")</td></tr></tbody></table></div></section>
-                            <section id="buffet-3" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-user-tie mr-3 kv-blue-text"></i>3. Chân dung & Nỗi đau</h2><div class="mt-4 bg-slate-50 rounded-lg p-4 border"><p><strong>Khách hàng:</strong> Anh Cường, Quản lý Nhà hàng "Lẩu Nướng Xèo Xèo".</p><p><strong>Mô hình:</strong> 40 bàn, chuyên Lẩu Nướng tại bàn.</p></div><div class="mt-6 bg-red-50 border-l-4 border-red-500 text-red-800 p-4 rounded-r-lg" role="alert"><h4 class="font-bold flex items-center"><i class="fa-solid fa-heart-crack mr-2"></i>Nỗi đau cốt lõi</h4><ol class="list-decimal list-inside mt-2 space-y-1"><li><strong>Hỗn loạn Lễ tân:</strong> Tính tiền vé, áp voucher thủ công cho đoàn đông rất lâu và sai sót.</li><li><strong>Không kiểm soát được thời gian:</strong> Dùng sổ sách, đồng hồ để "canh" giờ khách, thường xuyên quên, gây thất thoát.</li><li><strong>Sai sót Order tại bàn:</strong> Nhân viên ghi giấy, bếp làm thiếu/sai món, khách bực mình vì chờ đồ ăn.</li><li><strong>Thất thoát Đồ uống (lớn nhất):</strong> Khách gọi thêm đồ uống (tính phí), nhân viên quên báo hoặc gian lận.</li></ol></div></section>
-                            <section id="buffet-4" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-cash-register mr-3 kv-blue-text"></i>4. Lựa chọn (1): Trạm Lễ tân / Thu ngân</h2><div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6"><div class="border rounded-lg p-4 bg-white"><h4 class="font-bold flex items-center"><i class="fa-solid fa-desktop mr-2 text-slate-500"></i>A: Dùng Bộ PC</h4><p class="text-sm text-slate-500 mt-2"><strong>Ưu điểm:</strong> <span class="text-green-600">Tiết kiệm chi phí,</span> mạnh cho nghiệp vụ quản lý đặt bàn.</p><p class="text-sm text-slate-500"><strong>Nhược điểm:</strong> <span class="text-red-600">Thao tác check-in chậm hơn cảm ứng.</span></p></div><div class="border-2 kv-blue-border rounded-lg p-4 bg-blue-50 relative"><span class="absolute top-0 right-0 -mt-3 -mr-3 kv-blue-bg text-white text-xs font-bold px-3 py-1 rounded-full">Khuyến nghị</span><h4 class="font-bold flex items-center"><i class="fa-solid fa-tablet-screen-button mr-2 kv-blue-text"></i>B: Máy POS Chuyên dụng</h4><p class="text-sm text-slate-600 mt-2"><strong>Ưu điểm:</strong> <span class="text-green-600">Chuyên nghiệp, thao tác chạm chọn Vé rất nhanh.</span></p><p class="text-sm text-slate-600"><strong>Nhược điểm:</strong> <span class="text-red-600">Chi phí đầu tư ban đầu cao hơn.</span></p></div></div></section>
-                            <section id="buffet-5" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-mobile-alt mr-3 kv-blue-text"></i>5. Lựa chọn (2): Thiết bị Order Phụ trợ</h2><div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6"><div class="border-2 kv-blue-border rounded-lg p-4 bg-blue-50 relative"><span class="absolute top-0 right-0 -mt-3 -mr-3 kv-blue-bg text-white text-xs font-bold px-3 py-1 rounded-full">Khuyến nghị</span><h4 class="font-bold flex items-center"><i class="fa-solid fa-tablet-alt mr-2 kv-blue-text"></i>A: Đầu tư Tablet chuyên dụng</h4><p class="text-sm text-slate-600 mt-2"><strong>Ưu điểm:</strong> <span class="text-green-600">Chuyên nghiệp,</span> màn hình to, chọn món nhanh và chính xác.</p><p class="text-sm text-slate-600"><strong>Nhược điểm:</strong> <span class="text-red-600">Chi phí đầu tư.</span></p></div><div class="border rounded-lg p-4 bg-white"><h4 class="font-bold flex items-center"><i class="fa-solid fa-mobile-screen mr-2 text-slate-500"></i>B: Dùng Điện thoại nhân viên</h4><p class="text-sm text-slate-500 mt-2"><strong>Ưu điểm:</strong> <span class="text-green-600">Chi phí = 0 đồng.</span></p><p class="text-sm text-slate-500"><strong>Nhược điểm:</strong> <span class="text-red-600">Thiếu chuyên nghiệp,</span> dễ xao nhãng.</p></div></div></section>
-                            <section id="buffet-6" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-box-open mr-3 kv-blue-text"></i>6. Gói Phần cứng Hoàn chỉnh</h2><div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6"><div class="border rounded-lg p-4 bg-white"><h4 class="font-bold flex items-center"><i class="fa-solid fa-laptop-code mr-2 text-slate-500"></i>Combo 1: Gói TIẾT KIỆM</h4><ul class="text-sm mt-2 list-disc list-inside space-y-1"><li><strong>Trạm chính:</strong> Bộ PC có sẵn.</li><li><strong>Order di động:</strong> Điện thoại nhân viên.</li><li><strong>Bếp/Bar:</strong> 02 Máy in Bếp.</li><li><strong>Thu ngân:</strong> Máy in bill, Ngăn kéo, Màn hình QR.</li></ul></div><div class="border-2 kv-blue-border rounded-lg p-4 bg-blue-50 relative"><span class="absolute top-0 right-0 -mt-3 -mr-3 kv-blue-bg text-white text-xs font-bold px-3 py-1 rounded-full">Khuyến nghị</span><h4 class="font-bold flex items-center"><i class="fa-solid fa-gem mr-2 kv-blue-text"></i>Combo 2: Gói CHUYÊN NGHIỆP</h4><ul class="text-sm mt-2 list-disc list-inside space-y-1"><li><strong>Trạm chính:</strong> Máy POS Chuyên dụng.</li><li><strong>Order di động:</strong> 5 Tablet chuyên dụng.</li><li><strong>Bếp/Bar:</strong> 02 Máy in Bếp.</li><li><strong>Thu ngân:</strong> Ngăn kéo, Màn hình QR.</li></ul></div></div></section>
-                            <section id="buffet-7" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-network-wired mr-3 kv-blue-text"></i>7. Setup Thiết bị Mạng</h2><div class="mt-4 overflow-x-auto"><table class="custom-table"><thead><tr><th>Phương án</th><th>Ưu điểm</th><th>Nhược điểm</th></tr></thead><tbody><tr class="bg-red-50 text-red-700"><td><strong>TỐI THIỂU</strong> (Router + Repeater)</td><td>Tiết kiệm.</td><td><strong>Rủi ro cao nhất.</strong> Mạng yếu, chập chờn, không ổn định.</td></tr><tr class="bg-green-50 text-green-700"><td><strong>KHUYẾN NGHỊ</strong> (Cân bằng tải + PoE + AP)</td><td><strong>Ổn định 95%.</strong> Chịu tải tốt, có mạng dự phòng, phủ sóng đều.</td><td>Chi phí cao hơn.</td></tr><tr class="bg-blue-50 text-blue-700"><td><strong>CAO CẤP</strong> (Hệ thống Roaming)</td><td><strong>Ổn định 99.9%.</strong> Di chuyển không ngắt kết nối.</td><td>Chi phí cao.</td></tr></tbody></table></div><blockquote class="mt-6 border-l-4 kv-blue-border bg-slate-100 p-4 italic text-slate-700 rounded-r-lg"><strong>Tư vấn Kỹ thuật:</strong> Để đảm bảo tốc độ in nhanh nhất, <strong>Trạm Thu ngân chính</strong> và <strong>02 Máy in Bếp/Bar</strong> phải được <code>cắm dây mạng (LAN)</code>.</blockquote></section>
-                            <section id="buffet-8" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-cogs mr-3 kv-blue-text"></i>8. Quy trình Thiết lập & Chuyển giao</h2><div class="mt-6 space-y-4"><p><i class="fas fa-stopwatch mr-2 kv-blue-text"></i><strong>Thiết lập Quản lý Thời gian:</strong> Ngay khi thu ngân thanh toán vé, KiotViet tự động đếm ngược 90 phút cho bàn đó.</p><p><i class="fas fa-cash-register mr-2 text-green-500"></i><strong>Đào tạo Lễ tân:</strong> Chọn vé (Người lớn/Trẻ em) nhanh chóng, áp voucher tự động. Hệ thống tự động cảnh báo bàn sắp hết giờ (Giải quyết Nỗi đau 1, 2).</p><p><i class="fas fa-tablet-alt mr-2 text-green-500"></i><strong>Đào tạo Phục vụ:</strong> Dùng Tablet order món miễn phí (giá=0) và món tính phí. Toàn bộ món tính phí tự động ghi nợ vào bill (Giải quyết Nỗi đau 3, 4).</p><p><i class="fas fa-receipt mr-2 text-green-500"></i><strong>Đào tạo Thu ngân:</strong> Khi khách về, chỉ cần mở bàn để thu nốt tiền đồ uống bán thêm. Chống thất thoát 100%.</p></div></section>
-                            <section id="buffet-9" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-chart-line mr-3 kv-blue-text"></i>9. Tính toán Lợi tức Đầu tư (ROI)</h2><div class="mt-6 bg-green-50 border-l-4 border-green-500 text-green-800 p-4 rounded-r-lg" role="alert"><h4 class="font-bold flex items-center"><i class="fa-solid fa-piggy-bank mr-2"></i>Lợi ích thu về hàng tháng</h4><ul class="list-disc list-inside mt-2 space-y-1"><li><strong>Chống thất thoát doanh thu bán thêm:</strong> Tiết kiệm <strong>~9.000.000đ/tháng</strong>.</li><li><strong>Tăng vòng quay bàn:</strong> Kiểm soát thời gian chính xác giúp nhận thêm khách, tăng doanh thu hàng chục triệu đồng/ngày.</li></ul><hr class="my-2 border-green-200"><p class="font-bold">Hệ thống KiotViet giúp thu hồi vốn ngay trong tháng đầu tiên vận hành.</p></div></section>
-                            <section id="buffet-10" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-rocket mr-3 kv-blue-text"></i>10. Tư vấn Vận hành Nâng cao</h2><ul class="mt-4 list-disc list-inside space-y-2"><li><strong>Thực đơn điện tử (QR Order tại bàn):</strong> Khách tự quét mã để gọi thêm đồ ăn, giảm tải 80% cho nhân viên.</li><li><strong>Quản lý Định lượng Nguyên vật liệu:</strong> Biết chính xác đã tiêu thụ bao nhiêu Kg thịt, chống lãng phí trong bếp.</li><li><strong>Quản lý Đặt bàn Online:</strong> Tích hợp Website/Fanpage, khách tự đặt bàn online, thông tin tự động đồng bộ.</li></ul></section>
-                        </div>
-                    </div>
-                </div>
-                `,
-                'content-fastfood': `
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                    <aside class="lg:col-span-3">
-                        <nav id="sidebar-nav-fastfood" class="sidebar-nav sticky top-24">
-                            <div class="flex flex-col bg-white/60 backdrop-blur-lg rounded-xl p-4 border border-slate-200 space-y-1">
-                                <a href="#fastfood-1" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">1. Giới thiệu chung</a>
-                                <a href="#fastfood-2" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">2. Menu Giả định</a>
-                                <a href="#fastfood-3" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">3. Chân dung & Nỗi đau</a>
-                                <a href="#fastfood-4" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">4. Lựa chọn: Trạm Thu ngân</a>
-                                <a href="#fastfood-5" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">5. Lựa chọn: Thiết bị Phụ trợ</a>
-                                <a href="#fastfood-6" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">6. Gói Phần cứng</a>
-                                <a href="#fastfood-7" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">7. Setup Thiết bị Mạng</a>
-                                <a href="#fastfood-8" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">8. Quy trình Thiết lập</a>
-                                <a href="#fastfood-9" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">9. Tính toán ROI</a>
-                                <a href="#fastfood-10" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">10. Tư vấn Nâng cao</a>
-                            </div>
-                        </nav>
-                    </aside>
-                    <div class="lg:col-span-9">
-                        <div class="bg-white/60 backdrop-blur-lg rounded-2xl p-6 md:p-8 border border-slate-200 shadow-sm space-y-12">
-                            <section id="fastfood-1" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-info-circle mr-3 kv-blue-text"></i>1. Giới thiệu chung về Ngành Fast Food</h2><p class="mt-4">Ngành hàng Fast Food (Thức ăn nhanh) là ngành kinh doanh F&B mà ở đó <strong>TỐC ĐỘ</strong> là yếu tố sống còn.</p><h3 class="text-lg font-semibold text-slate-700 mt-6 mb-3">Đặc điểm chính:</h3><ul class="space-y-3"><li class="flex items-start"><i class="fa-solid fa-money-bill-wave w-5 mt-1 mr-3 text-slate-400"></i><span><strong>Thanh toán Trước:</strong> Khách order tại quầy -> Thanh toán -> Nhận số thứ tự -> Chờ nhận đồ.</span></li><li class="flex items-start"><i class="fa-solid fa-cogs w-5 mt-1 mr-3 text-slate-400"></i><span><strong>Tiêu chuẩn hóa:</strong> Sản phẩm được tiêu chuẩn hóa cao độ (Burger, Gà rán...).</span></li><li class="flex items-start"><i class="fa-solid fa-box-open w-5 mt-1 mr-3 text-slate-400"></i><span><strong>Bán hàng Combo:</strong> Hình thức bán chủ đạo là "Combo" (Gói sản phẩm).</span></li><li class="flex items-start"><i class="fa-solid fa-traffic-light w-5 mt-1 mr-3 text-slate-400"></i><span><strong>Nút thắt cổ chai:</strong> Toàn bộ áp lực dồn vào Quầy Thu ngân trong giờ cao điểm.</span></li><li class="flex items-start"><i class="fa-solid fa-user-clock w-5 mt-1 mr-3 text-slate-400"></i><span><strong>Nhân sự:</strong> Tỷ lệ nghỉ việc cao, cần hệ thống cực kỳ dễ sử dụng, đào tạo 5-10 phút là làm được.</span></li></ul></section>
-                            <section id="fastfood-2" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-book-open mr-3 kv-blue-text"></i>2. Menu Giả định ("Speedy Burger")</h2><div class="mt-4 overflow-x-auto"><table class="custom-table"><thead><tr><th>Nhóm hàng</th><th>Tên hàng hóa</th><th>Tùy chọn (Thêm tiền)</th></tr></thead><tbody><tr><td><strong>Combo</strong></td><td>Combo Gà Rán (1 Gà + 1 Khoai Vừa + 1 Nước Vừa)</td><td>- Chọn Nước: (Coca, Pepsi...) <br>- Nâng cỡ Khoai/Nước: (Thêm 5k)</td></tr><tr><td><strong>Món lẻ</strong></td><td>Burger Bò Phô Mai</td><td>- Ghi chú: ("Không hành") <br>- Thêm Phô mai: (Thêm 10k)</td></tr></tbody></table></div></section>
-                            <section id="fastfood-3" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-user-tie mr-3 kv-blue-text"></i>3. Chân dung & Nỗi đau</h2><div class="mt-4 bg-slate-50 rounded-lg p-4 border"><p><strong>Khách hàng:</strong> Anh Hùng, chủ quán "Speedy Burger".</p><p><strong>Mô hình:</strong> 1 quầy thu ngân (2 máy), 1 quầy giao hàng.</p></div><div class="mt-6 bg-red-50 border-l-4 border-red-500 text-red-800 p-4 rounded-r-lg" role="alert"><h4 class="font-bold flex items-center"><i class="fa-solid fa-heart-crack mr-2"></i>Nỗi đau cốt lõi</h4><ol class="list-decimal list-inside mt-2 space-y-1"><li><strong>Ùn tắc Quầy thu ngân:</strong> Nhân viên mới thao tác chậm, đặc biệt khi khách gọi Combo.</li><li><strong>Hỗn loạn Bếp:</strong> Thu ngân hét vào bếp, bếp làm sai (quên "không hành"), làm lộn xộn.</li><li><strong>Chậm trễ Thanh toán:</strong> Check app ngân hàng thủ công khi khách quét QR.</li><li><strong>Gian lận Thu ngân:</strong> Hủy hóa đơn, không nhập máy để biển thủ tiền.</li></ol></div></section>
-                            <section id="fastfood-4" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-cash-register mr-3 kv-blue-text"></i>4. Lựa chọn (1): Trạm Thu ngân chính</h2><div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6"><div class="border-2 border-red-500 rounded-lg p-4 bg-red-50"><h4 class="font-bold flex items-center"><i class="fa-solid fa-desktop mr-2 text-red-600"></i>A: Dùng Bộ PC</h4><p class="text-sm text-red-600 mt-2"><strong>Nhược điểm:</strong> <span class="text-red-600">Tốc độ order RẤT CHẬM,</span> không phù hợp Fast Food.</p></div><div class="border-2 kv-blue-border rounded-lg p-4 bg-blue-50 relative"><span class="absolute top-0 right-0 -mt-3 -mr-3 kv-blue-bg text-white text-xs font-bold px-3 py-1 rounded-full">Khuyến nghị</span><h4 class="font-bold flex items-center"><i class="fa-solid fa-tablet-screen-button mr-2 kv-blue-text"></i>B: Máy POS Chuyên dụng</h4><p class="text-sm text-slate-600 mt-2"><strong>Ưu điểm:</strong> <span class="text-green-600">Tốc độ nhanh nhất, gọn gàng, chuyên nghiệp,</span> nhân viên mới học 5 phút là biết dùng.</p><p class="text-sm text-slate-600"><strong>Nhược điểm:</strong> <span class="text-red-600">Chi phí đầu tư ban đầu.</span></p></div></div></section>
-                            <section id="fastfood-5" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-print mr-3 kv-blue-text"></i>5. Lựa chọn (2): Thiết bị Phụ trợ (Bếp & Giao hàng)</h2><div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6"><div class="border-2 kv-blue-border rounded-lg p-4 bg-blue-50 relative"><span class="absolute top-0 right-0 -mt-3 -mr-3 kv-blue-bg text-white text-xs font-bold px-3 py-1 rounded-full">Khuyến nghị</span><h4 class="font-bold flex items-center"><i class="fa-solid fa-print mr-2 kv-blue-text"></i>A: Máy in Bếp + Máy in Tem</h4><p class="text-sm text-slate-600 mt-2"><strong>Ưu điểm:</strong> <span class="text-green-600">Phân luồng công việc rõ ràng,</span> giao hàng chính xác 100%.</p></div><div class="border rounded-lg p-4 bg-white"><h4 class="font-bold flex items-center"><i class="fa-solid fa-tv mr-2 text-slate-500"></i>B: Màn hình Hiển thị Giao hàng</h4><p class="text-sm text-slate-500 mt-2"><strong>Ưu điểm:</strong> <span class="text-green-600">Chuyên nghiệp, hiện đại,</span> khách chủ động nhìn số, không cần hét gọi.</p></div></div></section>
-                            <section id="fastfood-6" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-box-open mr-3 kv-blue-text"></i>6. Gói Phần cứng Hoàn chỉnh</h2><div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6"><div class="border-2 kv-blue-border rounded-lg p-4 bg-blue-50 relative"><span class="absolute top-0 right-0 -mt-3 -mr-3 kv-blue-bg text-white text-xs font-bold px-3 py-1 rounded-full">Khuyến nghị</span><h4 class="font-bold flex items-center"><i class="fa-solid fa-gem mr-2 kv-blue-text"></i>Combo 1: Gói CHUYÊN NGHIỆP</h4><ul class="text-sm mt-2 list-disc list-inside space-y-1"><li><strong>Trạm chính:</strong> Máy POS Chuyên dụng Cảm ứng.</li><li><strong>Bếp/Bar:</strong> Máy in Bếp + Máy in Tem.</li><li><strong>Thu ngân:</strong> Ngăn kéo, Màn hình QR.</li></ul></div><div class="border rounded-lg p-4 bg-white"><h4 class="font-bold flex items-center"><i class="fa-solid fa-robot mr-2 text-slate-500"></i>Combo 2: Gói TỰ ĐỘNG</h4><ul class="text-sm mt-2 list-disc list-inside space-y-1"><li>Bao gồm Gói Chuyên nghiệp VÀ BỔ SUNG:</li><li><strong>01 Kiosk Tự Order.</strong></li><li><strong>01 Màn hình Hiển thị Giao hàng.</strong></li></ul></div></div></section>
-                            <section id="fastfood-7" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-network-wired mr-3 kv-blue-text"></i>7. Setup Thiết bị Mạng</h2><div class="mt-4 overflow-x-auto"><table class="custom-table"><thead><tr><th>Phương án</th><th>Ưu điểm</th><th>Nhược điểm</th></tr></thead><tbody><tr class="bg-red-50 text-red-700"><td><strong>TỐI THIỂU</strong> (Router nhà mạng)</td><td>Tiết kiệm.</td><td><strong>Rủi ro cao nhất.</strong> Dễ bị treo khi đông khách.</td></tr><tr class="bg-green-50 text-green-700"><td><strong>KHUYẾN NGHỊ</strong> (Router chịu tải + Switch)</td><td><strong>Ổn định 95%.</strong> Đảm bảo máy POS và máy in chạy mượt.</td><td>Chi phí cao hơn.</td></tr></tbody></table></div><blockquote class="mt-6 border-l-4 kv-blue-border bg-slate-100 p-4 italic text-slate-700 rounded-r-lg"><strong>Tư vấn Kỹ thuật:</strong> Toàn bộ thiết bị vận hành (Máy POS, Máy in Bếp/Tem) <strong>bắt buộc phải cắm dây mạng LAN</strong>. Chỉ dùng Wifi cho khách.</blockquote></section>
-                            <section id="fastfood-8" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-cogs mr-3 kv-blue-text"></i>8. Quy trình Thiết lập & Chuyển giao</h2><div class="mt-6 space-y-4"><p><i class="fas fa-magic mr-2 kv-blue-text"></i><strong>Thiết lập Combo Tùy chọn:</strong> Khi thu ngân chạm "Combo Gà Rán", KiotViet tự động bật pop-up yêu cầu "Chọn Nước", "Nâng cỡ?".</p><p><i class="fas fa-tachometer-alt mr-2 text-green-500"></i><strong>Đào tạo Thu ngân:</strong> Thao tác chạm cực nhanh, chính xác. Thanh toán QR tự động báo thành công, không cần check app (Giải quyết Nỗi đau 1, 3).</p><p><i class="fas fa-print mr-2 text-green-500"></i><strong>Đào tạo Bếp:</strong> Máy in Bếp/Tem tự động in phiếu chính xác 100% (VD: "Burger - KHÔNG HÀNH") (Giải quyết Nỗi đau 2).</p><p><i class="fas fa-user-shield mr-2 text-green-500"></i><strong>Đào tạo Quản lý:</strong> Phân quyền chống gian lận. Xem báo cáo Hủy/Giảm giá để phát hiện bất thường (Giải quyết Nỗi đau 4).</p></div></section>
-                            <section id="fastfood-9" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-chart-line mr-3 kv-blue-text"></i>9. Tính toán Lợi tức Đầu tư (ROI)</h2><div class="mt-6 bg-green-50 border-l-4 border-green-500 text-green-800 p-4 rounded-r-lg" role="alert"><h4 class="font-bold flex items-center"><i class="fa-solid fa-piggy-bank mr-2"></i>Lợi ích thu về hàng tháng</h4><ul class="list-disc list-inside mt-2 space-y-1"><li><strong>Tăng tốc độ phục vụ:</strong> Tăng doanh thu giờ cao điểm <strong>~45.000.000đ/tháng</strong>.</li><li><strong>Chống thất thoát & gian lận:</strong> Tiết kiệm <strong>~5.000.000đ - 8.000.000đ/tháng</strong>.</li><li><strong>Giảm chi phí sai hỏng:</strong> Tiết kiệm thêm <strong>~3.000.000đ/tháng</strong>.</li></ul><hr class="my-2 border-green-200"><p class="font-bold">Tổng lợi ích >50.000.000đ/tháng. Thu hồi vốn ngay trong tháng đầu tiên.</p></div></section>
-                            <section id="fastfood-10" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-rocket mr-3 kv-blue-text"></i>10. Tư vấn Vận hành Nâng cao</h2><ul class="mt-4 list-disc list-inside space-y-2"><li><strong>Kiosk Tự Phục vụ (Self-Order Kiosk):</strong> Giảm tải 80-100% cho quầy thu ngân, tiết kiệm 1-2 nhân sự/ca.</li><li><strong>Kết nối Ứng dụng Giao hàng (Bắt buộc):</strong> Đơn hàng tự động đồng bộ vào máy POS và Máy in Bếp.</li><li><strong>Màn hình Hiển thị Giao hàng:</strong> Chuyên nghiệp, hiện đại, giảm ồn ào (không cần hét số).</li></ul></section>
-                        </div>
-                    </div>
-                </div>
-                `,
-                'content-local': `
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                    <aside class="lg:col-span-3">
-                        <nav id="sidebar-nav-local" class="sidebar-nav sticky top-24">
-                            <div class="flex flex-col bg-white/60 backdrop-blur-lg rounded-xl p-4 border border-slate-200 space-y-1">
-                                <a href="#local-1" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">1. Giới thiệu chung</a>
-                                <a href="#local-2" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">2. Menu Giả định</a>
-                                <a href="#local-3" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">3. Chân dung & Nỗi đau</a>
-                                <a href="#local-4" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">4. Gói Phần cứng</a>
-                                <a href="#local-5" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">5. Setup Thiết bị Mạng</a>
-                                <a href="#local-6" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">6. Quy trình Thiết lập</a>
-                                <a href="#local-7" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">7. Tính toán ROI</a>
-                                <a href="#local-8" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">8. Tư vấn Nâng cao</a>
-                            </div>
-                        </nav>
-                    </aside>
-                    <div class="lg:col-span-9">
-                        <div class="bg-white/60 backdrop-blur-lg rounded-2xl p-6 md:p-8 border border-slate-200 shadow-sm space-y-12">
-                            <section id="local-1" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-info-circle mr-3 kv-blue-text"></i>1. Giới thiệu chung về Ngành Quán bình dân</h2><p class="mt-4">Ngành hàng "Quán bình dân" (Cơm, Phở, Bún) là trụ cột của ngành F&B Việt Nam, phục vụ số lượng khách cực lớn trong thời gian ngắn.</p><h3 class="text-lg font-semibold text-slate-700 mt-6 mb-3">Đặc điểm chính:</h3><ul class="space-y-3"><li class="flex items-start"><i class="fa-solid fa-users w-5 mt-1 mr-3 text-slate-400"></i><span><strong>Vòng quay bàn:</strong> Cực kỳ nhanh, khách vào ăn và rời đi trong 20-30 phút.</span></li><li class="flex items-start"><i class="fa-solid fa-user-tie w-5 mt-1 mr-3 text-slate-400"></i><span><strong>Chủ quán là trung tâm:</strong> Thường là Thu ngân, Quản lý và trực tiếp nhận order.</span></li><li class="flex items-start"><i class="fa-solid fa-money-bill-alt w-5 mt-1 mr-3 text-slate-400"></i><span><strong>Thanh toán Tiền mặt:</strong> Vẫn chiếm đa số, nhưng nhu cầu quét QR đang tăng nhanh.</span></li><li class="flex items-start"><i class="fa-solid fa-exchange-alt w-5 mt-1 mr-3 text-slate-400"></i><span><strong>Hai luồng thanh toán:</strong> Thanh toán Trước (Cơm) hoặc Sau (Phở, Bún).</span></li><li class="flex items-start"><i class="fa-solid fa-exclamation-triangle w-5 mt-1 mr-3 text-slate-400"></i><span><strong>Nỗi đau lớn nhất:</strong> Tính tiền chậm, sai sót và thất thoát.</span></li></ul></section>
-                            <section id="local-2" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-book-open mr-3 kv-blue-text"></i>2. Menu Giả định ("Phở Gia Truyền")</h2><div class="mt-4 overflow-x-auto"><table class="custom-table"><thead><tr><th>Nhóm hàng</th><th>Tên hàng hóa</th><th>Tùy chọn (Ghi chú)</th></tr></thead><tbody><tr><td><strong>Phở</strong></td><td>Phở Tái, Phở Chín, Phở Đặc Biệt</td><td>- Ghi chú: (Ví dụ: "Không hành", "Nhiều bánh")</td></tr><tr><td><strong>Đồ ăn kèm</strong></td><td>Quẩy (Đĩa), Trứng trần</td><td>(Không có)</td></tr><tr><td><strong>Đồ uống</strong></td><td>Trà đá, Coca-Cola (Chai)</td><td>(Không có)</td></tr></tbody></table></div></section>
-                            <section id="local-3" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-user-tie mr-3 kv-blue-text"></i>3. Chân dung & Nỗi đau</h2><div class="mt-4 bg-slate-50 rounded-lg p-4 border"><p><strong>Khách hàng:</strong> Cô Lan, chủ quán "Phở Gia Truyền".</p><p><strong>Mô hình:</strong> Quán gia đình, 15 bàn, cực đông giờ cao điểm.</p></div><div class="mt-6 bg-red-50 border-l-4 border-red-500 text-red-800 p-4 rounded-r-lg" role="alert"><h4 class="font-bold flex items-center"><i class="fa-solid fa-heart-crack mr-2"></i>Nỗi đau cốt lõi</h4><ol class="list-decimal list-inside mt-2 space-y-1"><li><strong>Hỗn loạn Bếp:</strong> Bếp nghe "hét" bị loạn, làm sai món, quên món.</li><li><strong>Tính tiền Ùn tắc:</strong> Tính nhẩm lâu, dễ sai, gây ùn tắc tại quầy.</li><li><strong>Thất thoát (lớn nhất):</strong> Khách quen ghi sổ (quên thu), nhân viên gian lận, không biết lời lỗ.</li></ol></div></section>
-                            <section id="local-4" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-box-open mr-3 kv-blue-text"></i>4. Gói Phần cứng Hoàn chỉnh (Khuyến nghị)</h2><p class="mt-4">Với quán bình dân, không cần PC cồng kềnh. Chỉ cần 1 thiết bị cảm ứng nhỏ gọn là đủ.</p><div class="mt-6 border-2 kv-blue-border rounded-lg p-4 bg-blue-50 relative"><span class="absolute top-0 right-0 -mt-3 -mr-3 kv-blue-bg text-white text-xs font-bold px-3 py-1 rounded-full">Khuyến nghị</span><h4 class="font-bold flex items-center"><i class="fa-solid fa-gem mr-2 kv-blue-text"></i>Gói CHUYÊN NGHIỆP (Chi phí thấp)</h4><ul class="text-sm mt-2 list-disc list-inside space-y-1"><li><strong>Trạm chính (Quầy):</strong> 01 Tablet (Máy tính bảng) 10-inch.</li><li><strong>Thiết bị Bếp:</strong> 01 Máy in Bếp K80.</li><li><strong>Thiết bị Thu ngân:</strong> 01 Máy in Hóa đơn K80 + 01 Ngăn kéo Đựng tiền + Màn hình quét mã QR.</li></ul><p class="mt-4 text-sm text-slate-700"><strong>Lợi ích:</strong> Giải quyết triệt để 3 nỗi đau với chi phí đầu tư rất thấp.</p></div></section>
-                            <section id="local-5" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-network-wired mr-3 kv-blue-text"></i>5. Setup Thiết bị Mạng (Đơn giản)</h2><div class="mt-4 overflow-x-auto"><table class="custom-table"><thead><tr><th>Phương án</th><th>Ưu điểm</th><th>Nhược điểm</th></tr></thead><tbody><tr class="bg-red-50 text-red-700"><td><strong>TỐI THIỂU</strong> (Router nhà mạng)</td><td>Tận dụng.</td><td>Wifi có thể treo khi khách dùng quá đông.</td></tr><tr class="bg-green-50 text-green-700"><td><strong>KHUYẾN NGHỊ</strong> (1 Access Point)</td><td><strong>Ổn định cao, chi phí thấp (1-2 triệu).</strong> Chịu tải tốt.</td><td>Chi phí đầu tư nhỏ.</td></tr></tbody></table></div><blockquote class="mt-6 border-l-4 kv-blue-border bg-slate-100 p-4 italic text-slate-700 rounded-r-lg"><strong>Tư vấn Kỹ thuật:</strong> Để ổn định nhất, <strong>Máy in Bếp</strong> và <strong>Máy in Hóa đơn</strong> nên được <code>cắm dây mạng (LAN)</code>. Tablet có thể dùng Wifi.</blockquote></section>
-                            <section id="local-6" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-cogs mr-3 kv-blue-text"></i>6. Quy trình Thiết lập & Chuyển giao</h2><div class="mt-6 space-y-4"><p><i class="fas fa-tablet-alt mr-2 text-green-500"></i><strong>Đào tạo Order:</strong> Chủ quán chạm vào Tablet -> Máy in Bếp tự động in phiếu to, rõ. Bếp làm chính xác 100%, không sai, không quên (Giải quyết Nỗi đau 1).</p><p><i class="fas fa-calculator mr-2 text-green-500"></i><strong>Đào tạo Thanh toán:</strong> Chạm vào bàn trên Tablet -> KiotViet tự động tính tổng tiền. Tính tiền trong 5 giây, nhanh gấp 10 lần tính nhẩm (Giải quyết Nỗi đau 2, 3).</p><p><i class="fas fa-mobile-alt mr-2 text-green-500"></i><strong>Đào tạo Quản lý:</strong> Cuối ngày, chủ quán mở App KiotViet Quản lý xem báo cáo: "Hôm nay bán 150 bát Phở Tái". Biết chính xác doanh thu, lãi lỗ, không lo thất thoát.</p></div></section>
-                            <section id="local-7" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-chart-line mr-3 kv-blue-text"></i>7. Tính toán Lợi tức Đầu tư (ROI)</h2><div class="mt-6 bg-green-50 border-l-4 border-green-500 text-green-800 p-4 rounded-r-lg" role="alert"><h4 class="font-bold flex items-center"><i class="fa-solid fa-piggy-bank mr-2"></i>Đầu tư vào Chống Thất thoát</h4><p class="mt-2">Trước đây, thất thoát do gian lận, tính sai, quên thu... (Giả định 150.000đ/ngày) -> <strong>Mất 4.500.000đ/tháng.</strong></p><hr class="my-2 border-green-200"><p class="font-bold">Sau khi dùng KiotViet, chủ quán giữ lại được 4.500.000đ/tháng. Với chi phí đầu tư Gói Khuyến nghị (~10-15 triệu), sẽ thu hồi vốn chỉ sau 3 tháng.</p></div></section>
-                            <section id="local-8" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-rocket mr-3 kv-blue-text"></i>8. Tư vấn Vận hành Nâng cao</h2><ul class="mt-4 list-disc list-inside space-y-2"><li><strong>Mô hình Cơm bình dân:</strong> Thiết lập quy trình "Thanh toán Trước". Khách chọn món -> Tính tiền ngay -> Nhận đồ.</li><li><strong>Quản lý Định lượng Nguyên vật liệu (Kho):</strong> Biết chính xác tồn kho thịt, phở, không lo bếp lãng phí.</li><li><strong>Kết nối Ứng dụng Giao hàng:</strong> Đơn hàng giao đi tự động đồng bộ vào máy POS và Máy in Bếp.</li></ul></section>
-                        </div>
-                    </div>
-                </div>
-                `,
-                'content-canteen': `
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                    <aside class="lg:col-span-3">
-                        <nav id="sidebar-nav-canteen" class="sidebar-nav sticky top-24">
-                            <div class="flex flex-col bg-white/60 backdrop-blur-lg rounded-xl p-4 border border-slate-200 space-y-1">
-                                <a href="#canteen-1" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">1. Giới thiệu chung</a>
-                                <a href="#canteen-2" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">2. "Menu" Giả định</a>
-                                <a href="#canteen-3" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">3. Chân dung & Nỗi đau</a>
-                                <a href="#canteen-4" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">4. Lựa chọn: Trạm Quản lý</a>
-                                <a href="#canteen-5" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">5. Lựa chọn: Thiết bị tại Quầy</a>
-                                <a href="#canteen-6" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">6. Gói Phần cứng</a>
-                                <a href="#canteen-7" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">7. Setup Thiết bị Mạng</a>
-                                <a href="#canteen-8" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">8. Quy trình Thiết lập</a>
-                                <a href="#canteen-9" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">9. Tính toán ROI</a>
-                                <a href="#canteen-10" class="px-4 py-2 text-sm text-slate-700 border-l-2 border-transparent hover:bg-slate-100 rounded-r-md">10. Tư vấn Nâng cao</a>
-                            </div>
-                        </nav>
-                    </aside>
-                    <div class="lg:col-span-9">
-                        <div class="bg-white/60 backdrop-blur-lg rounded-2xl p-6 md:p-8 border border-slate-200 shadow-sm space-y-12">
-                            <section id="canteen-1" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-info-circle mr-3 kv-blue-text"></i>1. Giới thiệu chung về Canteen / Food Court</h2><p class="mt-4">Đây là một hệ thống F&B phức tạp, nơi nhiều quầy hàng độc lập cùng hoạt động và chia sẻ một hệ thống thanh toán chung.</p><h3 class="text-lg font-semibold text-slate-700 mt-6 mb-3">Đặc điểm chính:</h3><ul class="space-y-3"><li class="flex items-start"><i class="fa-solid fa-credit-card w-5 mt-1 mr-3 text-slate-400"></i><span><strong>Thanh toán Tập trung:</strong> Khách không trả tiền mặt tại từng quầy.</span></li><li class="flex items-start"><i class="fa-solid fa-id-card w-5 mt-1 mr-3 text-slate-400"></i><span><strong>Mô hình Thẻ/Voucher:</strong> Khách dùng Thẻ trả trước, Thẻ ghi nợ hoặc Phiếu ăn để thanh toán.</span></li><li class="flex items-start"><i class="fa-solid fa-calculator w-5 mt-1 mr-3 text-slate-400"></i><span><strong>Đối soát Doanh thu:</strong> Nỗi đau lớn nhất. Ban Quản lý phải "chia tiền" cho từng quầy hàng.</span></li><li class="flex items-start"><i class="fa-solid fa-users-cog w-5 mt-1 mr-3 text-slate-400"></i><span><strong>Lưu lượng Cực lớn:</strong> Phục vụ hàng nghìn lượt khách trong một khung giờ cực ngắn.</span></li><li class="flex items-start"><i class="fa-solid fa-building w-5 mt-1 mr-3 text-slate-400"></i><span><strong>Đơn vị quản lý:</strong> Khách hàng của KiotViet thường là Ban Quản lý Canteen, không phải chủ quầy.</span></li></ul></section>
-                            <section id="canteen-2" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-book-open mr-3 kv-blue-text"></i>2. "Menu" Giả định (Canteen Nhà máy "Việt Tinh")</h2><p class="mt-4">"Menu" của Canteen chính là danh sách các Quầy hàng (Gian hàng) mà Ban Quản lý cần đối soát:</p><div class="mt-4 overflow-x-auto"><table class="custom-table"><thead><tr><th>Quầy hàng (Gian hàng)</th><th>Menu con (Hàng hóa)</th></tr></thead><tbody><tr><td><strong>Quầy 1: Cơm Truyền thống</strong></td><td>Cơm Sườn Bì Chả, Cơm Gà Xối Mỡ</td></tr><tr><td><strong>Quầy 2: Bún / Phở</strong></td><td>Phở Bò Tái, Bún Chả Hà Nội</td></tr><tr><td><strong>Quầy 3: Đồ uống & Tráng miệng</strong></td><td>Coca-Cola (Lon), Chè Bưởi</td></tr></tbody></table></div></section>
-                            <section id="canteen-3" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-user-tie mr-3 kv-blue-text"></i>3. Chân dung & Nỗi đau</h2><div class="mt-4 bg-slate-50 rounded-lg p-4 border"><p><strong>Khách hàng:</strong> Anh Long, Trưởng Ban Quản lý Canteen Nhà máy "Việt Tinh" (5.000 công nhân).</p></div><div class="mt-6 bg-red-50 border-l-4 border-red-500 text-red-800 p-4 rounded-r-lg" role="alert"><h4 class="font-bold flex items-center"><i class="fa-solid fa-heart-crack mr-2"></i>Nỗi đau cốt lõi</h4><ol class="list-decimal list-inside mt-2 space-y-1"><li><strong>"Địa ngục" Kế toán:</strong> Cuối tháng, thuê 3-4 người ngồi đếm hàng chục nghìn phiếu ăn giấy trong 5 ngày để đối soát.</li><li><strong>Ùn tắc Giờ ăn:</strong> Quy trình nộp phiếu, tích kê vào sổ rất chậm, gây ùn tắc nghiêm trọng.</li><li><strong>Thất thoát Hàng bán thêm:</strong> Nhân viên quầy nhận tiền mặt cho đồ uống và đút túi riêng.</li><li><strong>Không có Dữ liệu:</strong> Không biết món nào được ăn nhiều nhất, quầy nào phục vụ kém.</li></ol></div></section>
-                            <section id="canteen-4" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-desktop mr-3 kv-blue-text"></i>4. Lựa chọn (1): Trạm Quản lý & Nạp tiền (Trung tâm)</h2><div class="mt-6 border-2 kv-blue-border rounded-lg p-4 bg-blue-50 relative"><span class="absolute top-0 right-0 -mt-3 -mr-3 kv-blue-bg text-white text-xs font-bold px-3 py-1 rounded-full">Bắt buộc</span><h4 class="font-bold flex items-center"><i class="fa-solid fa-desktop mr-2 kv-blue-text"></i>A: Dùng Bộ PC (Máy tính)</h4><p class="text-sm text-slate-600 mt-2"><strong>Thiết bị:</strong> 1-2 Bộ PC (1 cho Kế toán, 1 cho Nạp tiền).</p><p class="text-sm text-slate-600 mt-2"><strong>Lý do:</strong> Bắt buộc phải dùng để quản lý 5.000 mã công nhân, nạp tiền hàng loạt, xem báo cáo đối soát doanh thu chi tiết cho từng quầy.</p></div></section>
-                            <section id="canteen-5" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-cash-register mr-3 kv-blue-text"></i>5. Lựa chọn (2): Thiết bị Ghi nhận Order (Tại Quầy hàng)</h2><div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6"><div class="border-2 kv-blue-border rounded-lg p-4 bg-blue-50 relative"><span class="absolute top-0 right-0 -mt-3 -mr-3 kv-blue-bg text-white text-xs font-bold px-3 py-1 rounded-full">Khuyến nghị</span><h4 class="font-bold flex items-center"><i class="fa-solid fa-tablet-screen-button mr-2 kv-blue-text"></i>A: Máy POS Chuyên dụng</h4><p class="text-sm text-slate-600 mt-2"><strong>Ưu điểm:</strong> <span class="text-green-600">Nhanh (3 giây/người), bền bỉ, chuyên nghiệp,</span> chịu được cường độ cao.</p><p class="text-sm text-slate-600"><strong>Nhược điểm:</strong> <span class="text-red-600">Chi phí đầu tư.</span></p></div><div class="border rounded-lg p-4 bg-white"><h4 class="font-bold flex items-center"><i class="fa-solid fa-tablet-alt mr-2 text-slate-500"></i>B: Tablet (Máy tính bảng)</h4><p class="text-sm text-slate-500 mt-2"><strong>Ưu điểm:</strong> <span class="text-green-600">Chi phí thấp hơn.</span></p><p class="text-sm text-slate-500"><strong>Nhược điểm:</strong> <span class="text-red-600">Mỏng manh, dễ hỏng, pin yếu,</span> cần thêm đầu đọc thẻ.</p></div></div></section>
-                            <section id="canteen-6" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-box-open mr-3 kv-blue-text"></i>6. Gói Phần cứng Hoàn chỉnh</h2><div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6"><div class="border-2 kv-blue-border rounded-lg p-4 bg-blue-50"><h4 class="font-bold flex items-center"><i class="fa-solid fa-building mr-2 kv-blue-text"></i>Gói 1: Trung tâm Điều hành</h4><ul class="text-sm mt-2 list-disc list-inside space-y-1"><li><strong>Trạm Quản lý/Kế toán:</strong> 1 Bộ PC.</li><li><strong>Trạm Nạp tiền/Quản lý Thẻ:</strong> 1 Bộ PC.</li><li><strong>Thiết bị phụ trợ:</strong> Máy quét Mã vạch, Máy in Hóa đơn.</li></ul></div><div class="border-2 kv-blue-border rounded-lg p-4 bg-blue-50"><h4 class="font-bold flex items-center"><i class="fa-solid fa-store mr-2 kv-blue-text"></i>Gói 2: Trạm Giao dịch (x3)</h4><ul class="text-sm mt-2 list-disc list-inside space-y-1"><li><strong>Tại mỗi quầy (Cơm, Phở, Nước):</strong></li><li>1 Máy POS Cảm ứng.</li><li>1 Máy in Hóa đơn (nếu cần).</li></ul></div></div></section>
-                            <section id="canteen-7" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-network-wired mr-3 kv-blue-text"></i>7. Setup Thiết bị Mạng</h2><div class="mt-4"><div class="border-2 kv-blue-border rounded-lg p-4 bg-blue-50"><h4 class="font-bold flex items-center"><i class="fa-solid fa-shield-alt mr-2 kv-blue-text"></i>Gói BẮT BUỘC (Mạng LAN)</h4><p class="text-sm mt-2 text-slate-600">Với 5.000 giao dịch/giờ, mạng chập chờn là 'thảm họa'.</p><ul class="text-sm mt-2 list-disc list-inside space-y-1"><li><strong>Thiết bị:</strong> 1 Router Cân bằng tải + 1 Switch PoE 24-Port.</li><li><strong>Ưu điểm:</strong> Ổn định tuyệt đối 99.9%, tốc độ quẹt thẻ nhanh nhất.</li></ul></div></div><blockquote class="mt-6 border-l-4 kv-blue-border bg-slate-100 p-4 italic text-slate-700 rounded-r-lg"><strong>Tư vấn Kỹ thuật:</strong> Toàn bộ <strong>2 PC (Trung tâm)</strong> và <strong>3 Máy POS (tại 3 Quầy)</strong> bắt buộc phải <code>cắm dây mạng (LAN)</code>.</blockquote></section>
-                            <section id="canteen-8" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-cogs mr-3 kv-blue-text"></i>8. Quy trình Thiết lập & Chuyển giao</h2><div class="mt-6 space-y-4"><p><i class="fas fa-id-card mr-2 kv-blue-text"></i><strong>Thiết lập Ban đầu:</strong> Nhập danh sách 5.000 công nhân, tạo mô hình "Thẻ trả trước" hoặc "Ghi nợ".</p><p><i class="fas fa-cash-register mr-2 text-green-500"></i><strong>Đào tạo Nhân viên Quầy:</strong> Dùng Máy POS chạm món -> Quẹt thẻ công nhân. Giao dịch 3-5 giây. Không dùng phiếu giấy, không dùng tiền mặt (Giải quyết Nỗi đau 2, 3).</p><p><i class="fas fa-calculator mr-2 text-green-500"></i><strong>Đào tạo Quản lý:</strong> Cuối ngày, xem báo cáo Đối soát: "Doanh thu Quầy Cơm: 90.000.000đ". Việc đối soát chỉ mất 5 phút thay vì 5 ngày (Giải quyết Nỗi đau 1, 4).</p></div></section>
-                            <section id="canteen-9" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-chart-line mr-3 kv-blue-text"></i>9. Tính toán Lợi tức Đầu tư (ROI)</h2><div class="mt-6 bg-green-50 border-l-4 border-green-500 text-green-800 p-4 rounded-r-lg" role="alert"><h4 class="font-bold flex items-center"><i class="fa-solid fa-piggy-bank mr-2"></i>Lợi ích thu về hàng tháng</h4><ul class="list-disc list-inside mt-2 space-y-1"><li><strong>Tiết kiệm Chi phí Nhân công Kế toán:</strong> <strong>~4.500.000đ/tháng</strong>.</li><li><strong>Chống Thất thoát & Gian lận:</strong> Giữ lại <strong>~15.000.000đ/tháng</strong> từ tiền bán thêm.</li></ul><hr class="my-2 border-green-200"><p class="font-bold">Tổng lợi ích: ~19.500.000đ/tháng. Thu hồi vốn chỉ sau 4-5 tháng.</p></div></section>
-                            <section id="canteen-10" class="content-section"><h2 class="text-2xl font-bold text-slate-800 flex items-center"><i class="fa-solid fa-rocket mr-3 kv-blue-text"></i>10. Tư vấn Vận hành Nâng cao</h2><ul class="mt-4 list-disc list-inside space-y-2"><li><strong>Tích hợp Thẻ Chấm công:</strong> Công nhân chỉ cần dùng 1 thẻ duy nhất cho mọi hoạt động.</li><li><strong>Quản lý Định lượng Nguyên vật liệu:</strong> Kiểm soát chi phí vốn, tồn kho, chống lãng phí tại bếp.</li><li><strong>Báo cáo Dinh dưỡng:</strong> Xuất báo cáo về lượng calo, đạm... đã tiêu thụ cho bộ phận Y tế/Nhân sự.</li></ul></section>
-                        </div>
-                    </div>
-                </div>
-                `,
-            };
+            // Show selected
+            document.getElementById(id).classList.add('active');
 
-            // --- FUNCTIONS ---
-            
-            function createTabButtons() {
-                tabsData.forEach((tab, index) => {
-                    const button = document.createElement('button');
-                    button.dataset.tabId = tab.id;
-                    button.innerHTML = `<i class="fas ${tab.icon} mr-2 text-sm"></i><span class="text-sm">${tab.title}</span>`;
-                    button.className = `tab-button flex items-center whitespace-nowrap px-4 py-2 font-semibold rounded-md transition-colors duration-200 ${
-                        index === 0 ? 'kv-blue-bg text-white' : 'text-slate-600 hover:bg-slate-100'
-                    }`;
-                    mainTabsContainer.appendChild(button);
-                });
-            }
+            // Update Sidebar Active State
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            const activeBtn = Array.from(document.querySelectorAll('button')).find(btn => btn.getAttribute('onclick').includes(id));
+            if(activeBtn) activeBtn.classList.add('active');
 
-            function switchTab(tabId) {
-                document.querySelectorAll('.tab-button').forEach(button => {
-                    const isActive = button.dataset.tabId === tabId;
-                    button.classList.toggle('kv-blue-bg', isActive);
-                    button.classList.toggle('text-white', isActive);
-                    button.classList.toggle('text-slate-600', !isActive);
-                    button.classList.toggle('hover:bg-slate-100', !isActive);
-                });
-
-                tabContentPanels.forEach(panel => {
-                    panel.classList.toggle('hidden', panel.id !== `content-${tabId}`);
-                });
-                
-                // Reset scroll position to top when switching tabs
-                window.scrollTo(0, 0);
-                setTimeout(setupScrollSpyForActiveTab, 100); // Delay to ensure content is visible
+            // Close mobile menu if open
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (!mobileMenu.classList.contains('hidden')) {
+                toggleMobileMenu();
             }
             
-            function setupScrollSpyForActiveTab() {
-                // First, clean up any existing observers
-                if (window.scrollSpyObserver) {
-                    window.scrollSpyObserver.disconnect();
-                }
+            // Scroll top
+            document.getElementById('main-container').scrollTop = 0;
+        }
 
-                const activePanel = document.querySelector('.tab-content-panel:not(.hidden)');
-                if (!activePanel) return;
-
-                const sidebarNav = activePanel.querySelector('.sidebar-nav');
-                const contentSections = activePanel.querySelectorAll('.content-section');
-                
-                if (!sidebarNav || contentSections.length === 0) return;
-                
-                const navLinks = sidebarNav.querySelectorAll('a');
-                
-                const observer = new IntersectionObserver(entries => {
-                    entries.forEach(entry => {
-                        const id = entry.target.getAttribute('id');
-                        const navLink = sidebarNav.querySelector(`a[href="#${id}"]`);
-                        
-                        if (navLink) {
-                           if (entry.isIntersecting && entry.intersectionRatio > 0.1) {
-                                navLinks.forEach(link => link.classList.remove('active'));
-                                navLink.classList.add('active');
-                            }
-                        }
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const list = document.getElementById('mobile-nav-list');
+            
+            if (menu.classList.contains('hidden')) {
+                // Populate list if empty (simple clone)
+                if (list.children.length === 0) {
+                    const sidebarLinks = document.querySelectorAll('aside nav ul li');
+                    sidebarLinks.forEach(li => {
+                        const clone = li.cloneNode(true);
+                        clone.querySelector('button').classList.remove('active'); // Reset active style
+                        // Add simple styling
+                        clone.querySelector('button').className = "w-full text-left px-4 py-3 hover:bg-gray-100 block text-gray-700";
+                        list.appendChild(clone);
                     });
-                }, { rootMargin: "-30% 0px -60% 0px", threshold: 0.1 });
-
-                contentSections.forEach(section => {
-                    observer.observe(section);
-                });
-                
-                window.scrollSpyObserver = observer; // Store observer to disconnect it later
-            }
-            
-            function handleTabScrolling() {
-                const checkScrollability = () => {
-                    if (!scrollWrapper) return;
-                    const { scrollWidth, clientWidth, scrollLeft } = scrollWrapper;
-                    const isScrollable = scrollWidth > clientWidth;
-                    
-                    scrollLeftBtn.classList.toggle('hidden', !isScrollable);
-                    scrollRightBtn.classList.toggle('hidden', !isScrollable);
-                    
-                    if(isScrollable) {
-                        scrollLeftBtn.disabled = scrollLeft <= 0;
-                        scrollRightBtn.disabled = scrollLeft + clientWidth >= scrollWidth - 1;
-                        
-                        scrollLeftBtn.classList.toggle('opacity-50', scrollLeftBtn.disabled);
-                        scrollRightBtn.classList.toggle('opacity-50', scrollRightBtn.disabled);
-                    }
-                };
-
-                scrollLeftBtn.addEventListener('click', () => scrollWrapper.scrollBy({ left: -250, behavior: 'smooth' }));
-                scrollRightBtn.addEventListener('click', () => scrollWrapper.scrollBy({ left: 250, behavior: 'smooth' }));
-
-                scrollWrapper.addEventListener('scroll', checkScrollability);
-                window.addEventListener('resize', checkScrollability);
-                
-                const observer = new MutationObserver(checkScrollability);
-                observer.observe(mainTabsContainer, { childList: true });
-
-                setTimeout(checkScrollability, 100); // Check after initial render
-            }
-
-            // --- INITIALIZATION ---
-            createTabButtons();
-            
-            // Inject the content for all tabs
-            for (const id in allContentData) {
-                const panel = document.getElementById(id);
-                if (panel) {
-                    panel.innerHTML = allContentData[id];
                 }
+                menu.classList.remove('hidden');
+            } else {
+                menu.classList.add('hidden');
             }
-            
-            mainTabsContainer.addEventListener('click', (e) => {
-                const button = e.target.closest('.tab-button');
-                if (button && button.dataset.tabId) {
-                    const tabId = button.dataset.tabId;
-                    switchTab(tabId);
-                    button.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-                }
-            });
-
-            handleTabScrolling();
-            setupScrollSpyForActiveTab();
-        });
+        }
     </script>
 </body>
 </html>
